@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Taluppfattning – Matematik som sitter kvar</title>
+
+<style>
+
+:root{
+  --bg:#f4f1e9;
+  --paper:#ffffff;
+  --green:#587464;
+  --green-dark:#385449;
+  --green-light:#dfe9e2;
+  --beige:#ebe1cf;
+  --beige-light:#f8f4ec;
+  --blue:#dde8ee;
+  --purple:#e7e1ef;
+  --yellow:#f2e9c8;
+  --rose:#efe0dd;
+  --text:#25312c;
+  --muted:#66716c;
+  --border:#d7ddd8;
+  --shadow:0 5px 18px rgba(30,50,40,.08);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
+
+header{
+  background:linear-gradient(135deg,#3e5d50,#617d6e);
+  color:white;
+  padding:28px 22px;
+}
+
+.header-inner{
+  max-width:1150px;
+  margin:auto;
+}
+
+header h1{
+  margin:0;
+  font-size:34px;
+}
+
+header p{
+  margin:8px 0 0;
+  max-width:850px;
+  font-size:17px;
+}
+
+nav{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:30;
+}
+
+.nav-inner{
+  max-width:1150px;
+  margin:auto;
+  padding:10px 16px;
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+}
+
+.nav-link{
+  text-decoration:none;
+  color:var(--green-dark);
+  background:var(--green-light);
+  padding:9px 12px;
+  border-radius:9px;
+  white-space:nowrap;
+  font-weight:bold;
+  font-size:14px;
+}
+
+main{
+  max-width:1150px;
+  margin:auto;
+  padding:24px 18px 70px;
+}
+
+.hero{
+  background:linear-gradient(135deg,var(--beige-light),#e3ece6);
+  padding:24px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  margin-bottom:22px;
+}
+
+.hero h2{
+  margin-top:0;
+  color:var(--green-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.card h3{
+  margin-top:0;
+  color:var(--green-dark);
+}
+
+.section-title{
+  margin:34px 0 14px;
+  color:var(--green-dark);
+  font-size:26px;
+}
+
+.box{
+  padding:15px;
+  border-radius:12px;
+  margin:12px 0;
+}
+
+.understand{
+  background:var(--green-light);
+}
+
+.talk{
+  background:var(--blue);
+}
+
+.connection{
+  background:var(--yellow);
+}
+
+.think{
+  background:var(--purple);
+}
+
+.support{
+  background:var(--rose);
+}
+
+.tag{
+  display:inline-block;
+  background:var(--green-light);
+  padding:5px 10px;
+  border-radius:20px;
+  margin:3px;
+  font-size:13px;
+}
+
+.activity{
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  border:1px solid var(--border);
+  margin-bottom:15px;
+  box-shadow:var(--shadow);
+}
+
+.question-card{
+  background:white;
+  border-left:6px solid var(--green);
+  border-radius:10px;
+  padding:15px;
+  margin:10px 0;
+}
+
+.number-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:14px 0;
+}
+
+.number-box{
+  background:var(--beige-light);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 18px;
+  font-weight:bold;
+  font-size:20px;
+}
+
+.accordion{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.accordion button{
+  width:100%;
+  background:white;
+  border:none;
+  padding:16px 18px;
+  font-size:17px;
+  font-weight:bold;
+  text-align:left;
+  color:var(--green-dark);
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+}
+
+.accordion-content{
+  display:none;
+  padding:0 18px 18px;
+}
+
+.accordion.open .accordion-content{
+  display:block;
+}
+
+.accordion.open .arrow{
+  transform:rotate(180deg);
+}
+
+.arrow{
+  transition:.2s;
+}
+
+.print-btn{
+  border:none;
+  background:var(--green);
+  color:white;
+  padding:11px 15px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:45px;
+}
+
+@media print{
+  header,
+  nav,
+  .no-print{
+    display:none!important;
+  }
+
+  body{
+    background:white;
+  }
+
+  main{
+    padding:0;
+  }
+
+  .card,
+  .activity,
+  .accordion{
+    box-shadow:none;
+    break-inside:avoid;
+  }
+
+  .accordion-content{
+    display:block!important;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+<h1>🔢 Taluppfattning</h1>
+<p>
+En del av <strong>Matematik som sitter kvar</strong>.
+Fokus ligger på talens storlek, struktur, relationer och representationer.
+</p>
+</div>
+</header>
+
+<nav class="no-print">
+<div class="nav-inner">
+<a class="nav-link" href="index.html">← Till startsidan</a>
+<a class="nav-link" href="#forsta">Förstå</a>
+<a class="nav-link" href="#representationer">Representationer</a>
+<a class="nav-link" href="#prata">Prata matematik</a>
+<a class="nav-link" href="#tankespar">Tankespår</a>
+<a class="nav-link" href="#praktiskt">Praktiskt</a>
+<a class="nav-link" href="#samband">Samband</a>
+<a class="nav-link" href="#minne">Matematikminne</a>
+<a class="nav-link" href="#utmaning">Utmaning</a>
+<a class="nav-link" href="#stod">NPF & språk</a>
+<a class="nav-link" href="#larare">Lärarstöd</a>
+</div>
+</nav>
+
+<main>
+
+<section class="hero">
+
+<h2>Tal är mer än siffror</h2>
+
+<p>
+God taluppfattning innebär att eleven kan bedöma storlek,
+se relationer, använda referenspunkter och växla mellan olika sätt
+att representera samma tal.
+</p>
+
+<div class="box understand">
+<strong>Den centrala idén:</strong>
+<p>
+Eleven ska kunna tänka flexibelt kring tal och inte vara beroende av en enda metod.
+</p>
+</div>
+
+</section>
+
+
+<h2 id="forsta" class="section-title">1. Förstå tal</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Eleven behöver förstå</h3>
+<ul>
+<li>Att siffrans värde beror på dess position.</li>
+<li>Att tal kan delas upp på flera sätt.</li>
+<li>Att tal har storlek och relation till andra tal.</li>
+<li>Att referenspunkter hjälper vid jämförelser.</li>
+<li>Att tal kan skrivas i olika former.</li>
+<li>Att negativa tal också har position och storlek.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Viktiga begrepp</h3>
+<span class="tag">ental</span>
+<span class="tag">tiotal</span>
+<span class="tag">hundratal</span>
+<span class="tag">tiondel</span>
+<span class="tag">hundradel</span>
+<span class="tag">storlek</span>
+<span class="tag">positionssystem</span>
+<span class="tag">tallinje</span>
+<span class="tag">negativa tal</span>
+</div>
+
+<div class="card">
+<h3>Kontrollfrågor</h3>
+<ul>
+<li>Vilket tal är störst?</li>
+<li>Hur nära är talet 1?</li>
+<li>Vad betyder siffran 5 i talet?</li>
+<li>Kan talet delas upp på ett annat sätt?</li>
+<li>Var skulle talet ligga på en tallinje?</li>
+</ul>
+</div>
+
+</div>
+
+
+<h2 id="representationer" class="section-title">2. Representationer</h2>
+
+<div class="activity">
+
+<h3>Samma tal – flera uttryck</h3>
+
+<div class="number-row">
+<div class="number-box">0,5</div>
+<div class="number-box">1/2</div>
+<div class="number-box">50 %</div>
+<div class="number-box">fem tiondelar</div>
+</div>
+
+<p>
+Eleven behöver förstå att olika skrivsätt kan uttrycka samma värde.
+</p>
+
+</div>
+
+<div class="accordion">
+<button>
+<span>📏 Tallinje</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+<p>
+Placera talen:
+</p>
+
+<p><strong>0,25 &nbsp;&nbsp; 0,7 &nbsp;&nbsp; 1,2 &nbsp;&nbsp; 1,75</strong></p>
+
+<p>
+Fråga:
+<strong>Vilka referenspunkter använder du?</strong>
+</p>
+</div>
+</div>
+
+<div class="accordion">
+<button>
+<span>🧱 Uppdelning av tal</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+
+<p>
+Hur kan talet 48 delas upp?
+</p>
+
+<ul>
+<li>40 + 8</li>
+<li>30 + 18</li>
+<li>50 − 2</li>
+<li>6 × 8</li>
+<li>96 ÷ 2</li>
+</ul>
+
+<p>
+Syftet är att utveckla flexibilitet, inte att hitta ett enda korrekt sätt.
+</p>
+
+</div>
+</div>
+
+<div class="accordion">
+<button>
+<span>🔍 Positionssystemet</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+
+<p>
+Undersök talet <strong>4 305,27</strong>.
+</p>
+
+<ul>
+<li>Vad betyder siffran 3?</li>
+<li>Vad betyder siffran 2?</li>
+<li>Hur förändras talet om siffran 5 flyttas en plats åt vänster?</li>
+</ul>
+
+</div>
+</div>
+
+
+<h2 id="prata" class="section-title">3. Prata matematik</h2>
+
+<div class="activity">
+
+<h3>Uppgift 1 – Vilket tal hör inte ihop?</h3>
+
+<div class="number-row">
+<div class="number-box">0,5</div>
+<div class="number-box">1/2</div>
+<div class="number-box">50 %</div>
+<div class="number-box">0,05</div>
+</div>
+
+<div class="question-card">
+<strong>Förklara:</strong><br>
+Vilket tal valde du och varför?
+</div>
+
+<div class="question-card">
+<strong>Utmana:</strong><br>
+Kan någon välja ett annat tal och ändå argumentera rimligt?
+</div>
+
+<div class="question-card">
+<strong>Samband:</strong><br>
+Hur hör de tre andra ihop?
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Uppgift 2 – Närmast 1</h3>
+
+<div class="number-row">
+<div class="number-box">0,89</div>
+<div class="number-box">1,08</div>
+<div class="number-box">0,9</div>
+</div>
+
+<p>
+Vilket tal ligger närmast 1?
+</p>
+
+<ul>
+<li>Hur tänkte du?</li>
+<li>Kan du visa med tallinje?</li>
+<li>Hur långt från 1 ligger varje tal?</li>
+</ul>
+
+</div>
+
+
+<h2 id="tankespar" class="section-title">4. Vanliga tankespår</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Tankespår 1</h3>
+<p>
+<strong>0,9 är mindre än 0,12 eftersom 9 är mindre än 12.</strong>
+</p>
+
+<div class="box think">
+Fråga:
+<p>
+Vilket tal ligger närmast 1? Visa båda talen på tallinje.
+</p>
+</div>
+</div>
+
+<div class="card">
+<h3>Tankespår 2</h3>
+<p>
+<strong>Fler siffror betyder större tal.</strong>
+</p>
+
+<div class="box think">
+<p>
+Jämför 0,8 och 0,75. Hur kan tallinjen hjälpa?
+</p>
+</div>
+</div>
+
+<div class="card">
+<h3>Tankespår 3</h3>
+<p>
+<strong>Siffrans värde ses utan hänsyn till position.</strong>
+</p>
+
+<div class="box think">
+<p>
+Vad betyder siffran 4 i 4 230 och vad betyder den i 0,4?
+</p>
+</div>
+</div>
+
+<div class="card">
+<h3>Tankespår 4</h3>
+<p>
+<strong>Negativa tal uppfattas som om större siffra betyder större tal.</strong>
+</p>
+
+<div class="box think">
+<p>
+Vilket är störst: −2 eller −7? Visa på tallinje.
+</p>
+</div>
+</div>
+
+</div>
+
+
+<h2 id="praktiskt" class="section-title">5. Praktiskt arbete</h2>
+
+<div class="activity">
+
+<h3>Aktivitet – Levande tallinje</h3>
+
+<p>
+Tejpa en tallinje på golvet.
+</p>
+
+<p>
+Markera till exempel:
+<strong>−2, −1, 0, 1 och 2</strong>.
+</p>
+
+<p>
+Dela ut talkort till eleverna:
+</p>
+
+<p>
+−1,5 &nbsp; 0,25 &nbsp; 1,75 &nbsp; −0,5 &nbsp; 1/2
+</p>
+
+<p>
+Eleverna placerar sig där de tror att talen hör hemma och förklarar sin placering.
+</p>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Aktivitet – Bygg tal</h3>
+
+<p>
+Ge eleverna siffrorna:
+<strong>2, 4, 6 och 8</strong>.
+</p>
+
+<p>
+Uppdrag:
+</p>
+
+<ul>
+<li>Bygg största möjliga tal.</li>
+<li>Bygg minsta möjliga tal.</li>
+<li>Bygg ett tal så nära 5 000 som möjligt.</li>
+<li>Bygg ett tal mellan 3 000 och 4 000.</li>
+</ul>
+
+<p>
+Eleverna måste förklara varför deras tal uppfyller villkoret.
+</p>
+
+</div>
+
+
+<h2 id="samband" class="section-title">6. Samband</h2>
+
+<div class="activity">
+
+<h3>Taluppfattning är grunden för nästan allt</h3>
+
+<div class="box connection">
+
+<p>
+<strong>
+Talstorlek → operationer → bråk → decimalform → procent →
+proportionalitet → algebra
+</strong>
+</p>
+
+</div>
+
+<p>
+När eleven har god taluppfattning blir det lättare att:
+</p>
+
+<ul>
+<li>uppskatta svar</li>
+<li>kontrollera rimlighet</li>
+<li>välja strategi</li>
+<li>förstå bråk</li>
+<li>hantera procent</li>
+<li>se algebraiska samband</li>
+</ul>
+
+</div>
+
+
+<h2 id="minne" class="section-title">7. Matematikminne</h2>
+
+<div class="activity">
+
+<h3>Fem återkallningsfrågor</h3>
+
+<div class="question-card">
+<strong>1.</strong><br>
+Vilket tal ligger närmast 2: 1,8 eller 2,15?
+</div>
+
+<div class="question-card">
+<strong>2.</strong><br>
+Vad betyder siffran 6 i talet 3 624?
+</div>
+
+<div class="question-card">
+<strong>3.</strong><br>
+Skriv två olika sätt att dela upp talet 72.
+</div>
+
+<div class="question-card">
+<strong>4.</strong><br>
+Vilket är störst: −3 eller −5?
+</div>
+
+<div class="question-card">
+<strong>5.</strong><br>
+Skriv 0,75 på två andra sätt.
+</div>
+
+</div>
+
+
+<h2 id="utmaning" class="section-title">8. Utmaning</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Utmaning 1</h3>
+<p>
+Hitta tre tal mellan 0,4 och 0,5.
+</p>
+<p>
+Kan du hitta tio?
+</p>
+</div>
+
+<div class="card">
+<h3>Utmaning 2</h3>
+<p>
+Vilket tal ligger exakt mitt emellan 3,4 och 4,2?
+</p>
+<p>
+Förklara hur du tänkte.
+</p>
+</div>
+
+<div class="card">
+<h3>Utmaning 3</h3>
+<p>
+Skapa ett tal som är större än 2,7 men mindre än 2,71.
+</p>
+<p>
+Hur många sådana tal finns det?
+</p>
+</div>
+
+<div class="card">
+<h3>Utmaning 4</h3>
+<p>
+Vilket är närmast 100?
+</p>
+<p>
+98,7 &nbsp;&nbsp; 101,1 &nbsp;&nbsp; 99,25
+</p>
+<p>
+Förklara utan miniräknare.
+</p>
+</div>
+
+</div>
+
+
+<h2 id="stod" class="section-title">9. NPF- och språkstöd</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🗣️ Språkstarter</h3>
+
+<p>
+Jag tror att _____ är störst eftersom _____.
+</p>
+
+<p>
+Talet ligger mellan _____ och _____.
+</p>
+
+<p>
+Siffran _____ har värdet _____.
+</p>
+
+<p>
+Jag vet att mitt svar är rimligt eftersom _____.
+</p>
+
+</div>
+
+<div class="card">
+<h3>👁️ Visuellt stöd</h3>
+
+<ul>
+<li>Använd tallinje ofta.</li>
+<li>Visa endast några få tal samtidigt.</li>
+<li>Markera positionsvärden tydligt.</li>
+<li>Koppla decimaler till visuella modeller.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h3>🧠 Kognitiv avlastning</h3>
+
+<ul>
+<li>Börja med tydliga referenspunkter.</li>
+<li>Låt eleven prata före skriftligt svar.</li>
+<li>Ge en jämförelse i taget.</li>
+<li>Använd återkommande strukturer.</li>
+</ul>
+
+</div>
+
+</div>
+
+
+<h2 id="larare" class="section-title">10. Lärarstöd</h2>
+
+<div class="activity">
+
+<h3>Vad ska läraren lyssna efter?</h3>
+
+<ul>
+<li>Ser eleven talens storlek?</li>
+<li>Använder eleven referenspunkter?</li>
+<li>Förstår eleven positionssystemet?</li>
+<li>Kan eleven dela upp tal flexibelt?</li>
+<li>Kan eleven uppskatta innan exakt beräkning?</li>
+<li>Kan eleven använda tallinje?</li>
+<li>Kan eleven förklara varför ett svar är rimligt?</li>
+</ul>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Frågor som utvecklar taluppfattning</h3>
+
+<ul>
+<li>Hur vet du vilket tal som är störst?</li>
+<li>Vad ligger talet närmast?</li>
+<li>Kan du visa på tallinje?</li>
+<li>Hur kan talet delas upp?</li>
+<li>Kan du hitta ett annat sätt?</li>
+<li>Vad händer om en siffra flyttas ett steg åt vänster?</li>
+<li>Är svaret rimligt?</li>
+</ul>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Exit ticket</h3>
+
+<ol>
+<li>
+Placera 0,65 mellan två lämpliga referenspunkter.
+</li>
+
+<li>
+Förklara varför 0,65 är större än 0,6.
+</li>
+</ol>
+
+<button class="print-btn no-print" onclick="window.print()">
+🖨️ Skriv ut sidan
+</button>
+
+</div>
+
+
+<footer>
+Matematik som sitter kvar • Taluppfattning • Matematikdidaktisk bank 4–9
+</footer>
+
+</main>
+
+
+<script>
+
+document.querySelectorAll(".accordion button").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    const box = button.parentElement;
+    box.classList.toggle("open");
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
