@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Procent – Matematik som sitter kvar</title>
+
+<style>
+
+:root{
+  --bg:#f4f1e9;
+  --paper:#ffffff;
+  --green:#587464;
+  --green-dark:#385449;
+  --green-light:#dfe9e2;
+  --beige:#ebe1cf;
+  --beige-light:#f8f4ec;
+  --blue:#dde8ee;
+  --purple:#e7e1ef;
+  --yellow:#f2e9c8;
+  --rose:#efe0dd;
+  --text:#25312c;
+  --muted:#66716c;
+  --border:#d7ddd8;
+  --shadow:0 5px 18px rgba(30,50,40,.08);
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
+
+header{
+  background:linear-gradient(135deg,#3e5d50,#617d6e);
+  color:white;
+  padding:28px 22px;
+}
+
+.header-inner{
+  max-width:1150px;
+  margin:auto;
+}
+
+header h1{
+  margin:0;
+  font-size:34px;
+}
+
+header p{
+  margin:8px 0 0;
+  max-width:850px;
+  font-size:17px;
+}
+
+nav{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:30;
+}
+
+.nav-inner{
+  max-width:1150px;
+  margin:auto;
+  padding:10px 16px;
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+}
+
+.nav-link{
+  text-decoration:none;
+  color:var(--green-dark);
+  background:var(--green-light);
+  padding:9px 12px;
+  border-radius:9px;
+  white-space:nowrap;
+  font-weight:bold;
+  font-size:14px;
+}
+
+main{
+  max-width:1150px;
+  margin:auto;
+  padding:24px 18px 70px;
+}
+
+.hero{
+  background:linear-gradient(135deg,var(--beige-light),#e3ece6);
+  padding:24px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  margin-bottom:22px;
+}
+
+.hero h2{
+  margin-top:0;
+  color:var(--green-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.card h3{
+  margin-top:0;
+  color:var(--green-dark);
+}
+
+.section-title{
+  margin:34px 0 14px;
+  color:var(--green-dark);
+  font-size:26px;
+}
+
+.box{
+  padding:15px;
+  border-radius:12px;
+  margin:12px 0;
+}
+
+.understand{background:var(--green-light)}
+.talk{background:var(--blue)}
+.connection{background:var(--yellow)}
+.think{background:var(--purple)}
+.support{background:var(--rose)}
+
+.tag{
+  display:inline-block;
+  background:var(--green-light);
+  padding:5px 10px;
+  border-radius:20px;
+  margin:3px;
+  font-size:13px;
+}
+
+.activity{
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  border:1px solid var(--border);
+  margin-bottom:15px;
+  box-shadow:var(--shadow);
+}
+
+.question-card{
+  background:white;
+  border-left:6px solid var(--green);
+  border-radius:10px;
+  padding:15px;
+  margin:10px 0;
+}
+
+.number-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:14px 0;
+}
+
+.number-box{
+  background:var(--beige-light);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px 18px;
+  font-weight:bold;
+  font-size:20px;
+}
+
+.accordion{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.accordion button{
+  width:100%;
+  background:white;
+  border:none;
+  padding:16px 18px;
+  font-size:17px;
+  font-weight:bold;
+  text-align:left;
+  color:var(--green-dark);
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+}
+
+.accordion-content{
+  display:none;
+  padding:0 18px 18px;
+}
+
+.accordion.open .accordion-content{
+  display:block;
+}
+
+.accordion.open .arrow{
+  transform:rotate(180deg);
+}
+
+.arrow{
+  transition:.2s;
+}
+
+.print-btn{
+  border:none;
+  background:var(--green);
+  color:white;
+  padding:11px 15px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:45px;
+}
+
+@media print{
+  header,
+  nav,
+  .no-print{
+    display:none!important;
+  }
+
+  body{
+    background:white;
+  }
+
+  main{
+    padding:0;
+  }
+
+  .card,
+  .activity,
+  .accordion{
+    box-shadow:none;
+    break-inside:avoid;
+  }
+
+  .accordion-content{
+    display:block!important;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+<h1>💯 Procent</h1>
+<p>
+En del av <strong>Matematik som sitter kvar</strong>.
+Fokus ligger på förståelse av procent som hundradelar,
+samband med bråk och decimalform samt proportionellt tänkande.
+</p>
+</div>
+</header>
+
+<nav class="no-print">
+<div class="nav-inner">
+<a class="nav-link" href="index.html">← Till startsidan</a>
+<a class="nav-link" href="#forsta">Förstå</a>
+<a class="nav-link" href="#representationer">Representationer</a>
+<a class="nav-link" href="#prata">Prata matematik</a>
+<a class="nav-link" href="#tankespar">Tankespår</a>
+<a class="nav-link" href="#praktiskt">Praktiskt</a>
+<a class="nav-link" href="#samband">Samband</a>
+<a class="nav-link" href="#minne">Matematikminne</a>
+<a class="nav-link" href="#utmaning">Utmaning</a>
+<a class="nav-link" href="#stod">NPF & språk</a>
+<a class="nav-link" href="#larare">Lärarstöd</a>
+</div>
+</nav>
+
+<main>
+
+<section class="hero">
+
+<h2>Procent betyder hundradelar</h2>
+
+<p>
+Eleven behöver förstå att procent inte är en fristående metod.
+Procent är ett sätt att beskriva en del av en helhet utifrån hundra.
+</p>
+
+<div class="box understand">
+<strong>Den centrala idén:</strong>
+<p>
+25 % betyder 25 av 100 och är därför samma värde som 25/100 = 1/4 = 0,25.
+</p>
+</div>
+
+</section>
+
+
+<h2 id="forsta" class="section-title">1. Förstå procent</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Eleven behöver förstå</h3>
+<ul>
+<li>Att procent betyder hundradelar.</li>
+<li>Att 100 % motsvarar en hel.</li>
+<li>Att procent kan kopplas till bråk och decimalform.</li>
+<li>Att procent kan beskriva en del av en mängd.</li>
+<li>Att procent kan användas för att jämföra.</li>
+<li>Att procentuell förändring bygger på proportionellt tänkande.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Viktiga begrepp</h3>
+<span class="tag">procent</span>
+<span class="tag">hundradel</span>
+<span class="tag">helhet</span>
+<span class="tag">andel</span>
+<span class="tag">förändring</span>
+<span class="tag">ökning</span>
+<span class="tag">minskning</span>
+<span class="tag">rabatt</span>
+<span class="tag">procentenhet</span>
+</div>
+
+<div class="card">
+<h3>Kontrollfrågor</h3>
+<ul>
+<li>Vad betyder 25 %?</li>
+<li>Hur skriver du 25 % som bråk?</li>
+<li>Hur skriver du 25 % i decimalform?</li>
+<li>Hur mycket är 100 %?</li>
+<li>Kan 150 % vara möjligt?</li>
+</ul>
+</div>
+
+</div>
+
+
+<h2 id="representationer" class="section-title">2. Representationer</h2>
+
+<div class="activity">
+
+<h3>Samma värde – flera uttryck</h3>
+
+<div class="number-row">
+<div class="number-box">25 %</div>
+<div class="number-box">25/100</div>
+<div class="number-box">1/4</div>
+<div class="number-box">0,25</div>
+</div>
+
+<p>
+Eleverna ska återkommande växla mellan dessa representationer.
+</p>
+
+</div>
+
+
+<div class="accordion">
+<button>
+<span>🧱 Hundraruta</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+<p>
+Rita eller använd en hundraruta.
+Färglägg 30 rutor.
+</p>
+
+<p>
+Fråga:
+<strong>Hur stor del av hela rutan är färgad?</strong>
+</p>
+
+<p>
+Koppla sedan:
+30/100 = 3/10 = 0,30 = 30 %.
+</p>
+</div>
+</div>
+
+
+<div class="accordion">
+<button>
+<span>📏 Tallinje</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+
+<p>
+Placera:
+</p>
+
+<p>
+0 % &nbsp;&nbsp; 25 % &nbsp;&nbsp; 50 % &nbsp;&nbsp; 75 % &nbsp;&nbsp; 100 %
+</p>
+
+<p>
+Fråga:
+<strong>Var skulle 125 % ligga?</strong>
+</p>
+
+</div>
+</div>
+
+
+<div class="accordion">
+<button>
+<span>🍕 Bråk till procent</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+
+<p>
+Koppla:
+</p>
+
+<ul>
+<li>1/2 = 50 %</li>
+<li>1/4 = 25 %</li>
+<li>3/4 = 75 %</li>
+<li>1/10 = 10 %</li>
+</ul>
+
+<p>
+Fråga:
+<strong>Hur hjälper bråkkunskaper oss när vi arbetar med procent?</strong>
+</p>
+
+</div>
+</div>
+
+
+<h2 id="prata" class="section-title">3. Prata matematik</h2>
+
+<div class="activity">
+
+<h3>Uppgift 1 – Vilka hör ihop?</h3>
+
+<div class="number-row">
+<div class="number-box">1/2</div>
+<div class="number-box">0,25</div>
+<div class="number-box">75 %</div>
+<div class="number-box">3/4</div>
+<div class="number-box">50 %</div>
+<div class="number-box">1/4</div>
+</div>
+
+<div class="question-card">
+<strong>Sortera:</strong><br>
+Vilka uttryck beskriver samma värde?
+</div>
+
+<div class="question-card">
+<strong>Förklara:</strong><br>
+Hur vet du?
+</div>
+
+<div class="question-card">
+<strong>Visa:</strong><br>
+Kan du använda hundraruta eller tallinje?
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Uppgift 2 – 50 % av vad?</h3>
+
+<p>
+50 % av ett tal är 30.
+</p>
+
+<ul>
+<li>Vilket är talet?</li>
+<li>Hur tänkte du?</li>
+<li>Kan du lösa utan en formel?</li>
+<li>Kan du visa sambandet med bild?</li>
+</ul>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Uppgift 3 – Rimligt eller inte?</h3>
+
+<p>
+En elev säger:
+</p>
+
+<div class="box think">
+<strong>
+”25 % av 80 måste vara större än 25 eftersom 80 är större än 25.”
+</strong>
+</div>
+
+<p>
+Diskutera:
+</p>
+
+<ul>
+<li>Vad kan eleven ha tänkt?</li>
+<li>Hur kan vi undersöka påståendet?</li>
+<li>Kan hundrarutan eller bråk hjälpa?</li>
+</ul>
+
+</div>
+
+
+<h2 id="tankespar" class="section-title">4. Vanliga tankespår</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Tankespår 1</h3>
+
+<p>
+<strong>25 % tolkas som talet 25.</strong>
+</p>
+
+<div class="box think">
+<p>
+Fråga:
+Vad betyder procenttecknet egentligen?
+25 av vad?
+</p>
+</div>
+</div>
+
+<div class="card">
+<h3>Tankespår 2</h3>
+
+<p>
+<strong>Eleven kan proceduren men ser inte sambandet med bråk.</strong>
+</p>
+
+<div class="box think">
+<p>
+Fråga:
+Om du vet att 25 % = 1/4, hur kan det hjälpa dig att beräkna 25 % av 80?
+</p>
+</div>
+</div>
+
+<div class="card">
+<h3>Tankespår 3</h3>
+
+<p>
+<strong>Procent över 100 uppfattas som omöjligt.</strong>
+</p>
+
+<div class="box think">
+<p>
+Fråga:
+Om du har 150 % av 100 kr, hur mycket är det då?
+</p>
+</div>
+</div>
+
+<div class="card">
+<h3>Tankespår 4</h3>
+
+<p>
+<strong>25 % ökning och 25 % minskning uppfattas som att de tar ut varandra.</strong>
+</p>
+
+<div class="box think">
+<p>
+Undersök 100 kr → öka 25 % → minska sedan 25 %.
+Hamnar du på 100 kr igen?
+</p>
+</div>
+</div>
+
+</div>
+
+
+<h2 id="praktiskt" class="section-title">5. Praktiskt arbete</h2>
+
+<div class="activity">
+
+<h3>Aktivitet – Procentstationer</h3>
+
+<p>
+Skapa fyra stationer:
+</p>
+
+<div class="question-card">
+<strong>Station 1:</strong><br>
+Bygg 25 % med hundraruta.
+</div>
+
+<div class="question-card">
+<strong>Station 2:</strong><br>
+Visa 50 % med bråkstavar eller vikta remsor.
+</div>
+
+<div class="question-card">
+<strong>Station 3:</strong><br>
+Placera 10 %, 40 %, 75 % och 125 % på en tallinje.
+</div>
+
+<div class="question-card">
+<strong>Station 4:</strong><br>
+Räkna ut 10 %, 50 % och 25 % av olika mängder.
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Aktivitet – Procent i klassrummet</h3>
+
+<p>
+Ta en verklig fråga, exempelvis:
+</p>
+
+<p>
+<strong>Hur stor andel av klassen har blå tröja idag?</strong>
+</p>
+
+<p>
+Eleverna:
+</p>
+
+<ul>
+<li>räknar antal</li>
+<li>skriver som bråk</li>
+<li>omvandlar till decimalform</li>
+<li>uppskattar procent</li>
+<li>förklarar hur de tänkte</li>
+</ul>
+
+</div>
+
+
+<h2 id="samband" class="section-title">6. Samband</h2>
+
+<div class="activity">
+
+<h3>Procent hör ihop med flera områden</h3>
+
+<div class="box connection">
+
+<p>
+<strong>
+Bråk → decimalform → procent → förhållande → proportionalitet → förändringsfaktor → algebra
+</strong>
+</p>
+
+</div>
+
+<p>
+Exempel:
+</p>
+
+<div class="number-row">
+<div class="number-box">3/4</div>
+<div class="number-box">0,75</div>
+<div class="number-box">75 %</div>
+</div>
+
+<p>
+Fråga:
+<strong>Vad förändras och vad är samma?</strong>
+</p>
+
+</div>
+
+
+<h2 id="minne" class="section-title">7. Matematikminne</h2>
+
+<div class="activity">
+
+<h3>Fem återkallningsfrågor</h3>
+
+<div class="question-card">
+<strong>1.</strong><br>
+Skriv 50 % som bråk och decimalform.
+</div>
+
+<div class="question-card">
+<strong>2.</strong><br>
+Hur mycket är 25 % av 80?
+</div>
+
+<div class="question-card">
+<strong>3.</strong><br>
+Vilket är störst: 40 % eller 2/5?
+</div>
+
+<div class="question-card">
+<strong>4.</strong><br>
+En vara kostar 200 kr och sänks med 10 %. Hur mycket sänks priset?
+</div>
+
+<div class="question-card">
+<strong>5.</strong><br>
+Förklara varför 75 % och 3/4 beskriver samma värde.
+</div>
+
+</div>
+
+
+<h2 id="utmaning" class="section-title">8. Utmaning</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Utmaning 1</h3>
+<p>
+30 % av ett tal är 24.
+</p>
+<p>
+Vilket är talet?
+Förklara på minst två sätt.
+</p>
+</div>
+
+<div class="card">
+<h3>Utmaning 2</h3>
+<p>
+En vara kostar 800 kr och sänks med 25 %.
+</p>
+<p>
+Hur mycket kostar den efter rabatten?
+Kan du lösa utan miniräknare?
+</p>
+</div>
+
+<div class="card">
+<h3>Utmaning 3</h3>
+<p>
+Ett pris höjs från 200 kr till 250 kr.
+</p>
+<p>
+Hur stor är ökningen i procent?
+</p>
+</div>
+
+<div class="card">
+<h3>Utmaning 4</h3>
+<p>
+Ett pris höjs med 20 % och sänks sedan med 20 %.
+</p>
+<p>
+Blir priset samma som från början?
+Förklara.
+</p>
+</div>
+
+</div>
+
+
+<h2 id="stod" class="section-title">9. NPF- och språkstöd</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🗣️ Språkstarter</h3>
+
+<p>
+_____ % betyder _____ av 100.
+</p>
+
+<p>
+Jag vet att _____ % är samma som bråket _____.
+</p>
+
+<p>
+Jag räknade först ut _____ % eftersom _____.
+</p>
+
+<p>
+Svaret är rimligt eftersom _____.
+</p>
+
+</div>
+
+<div class="card">
+<h3>👁️ Visuellt stöd</h3>
+
+<ul>
+<li>Använd hundraruta.</li>
+<li>Koppla procent till bråk.</li>
+<li>Visa procent på tallinje.</li>
+<li>Använd få tal samtidigt.</li>
+<li>Markera helheten tydligt.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h3>🧠 Kognitiv avlastning</h3>
+
+<ul>
+<li>Börja med 50 %, 25 % och 10 %.</li>
+<li>Bygg vidare mot andra procenttal.</li>
+<li>Låt eleven resonera innan formel introduceras.</li>
+<li>Använd samma visuella struktur återkommande.</li>
+</ul>
+
+</div>
+
+</div>
+
+
+<h2 id="larare" class="section-title">10. Lärarstöd</h2>
+
+<div class="activity">
+
+<h3>Vad ska läraren lyssna efter?</h3>
+
+<ul>
+<li>Förstår eleven att procent betyder hundradelar?</li>
+<li>Kan eleven identifiera helheten?</li>
+<li>Kan eleven koppla procent till bråk och decimalform?</li>
+<li>Kan eleven uppskatta procent?</li>
+<li>Kan eleven använda kända referenspunkter som 50 %, 25 % och 10 %?</li>
+<li>Kan eleven resonera om förändring?</li>
+<li>Kan eleven avgöra om ett svar är rimligt?</li>
+</ul>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Frågor som utvecklar förståelsen</h3>
+
+<ul>
+<li>Vad är helheten?</li>
+<li>Vad betyder procenttalet?</li>
+<li>Kan du skriva procenten som bråk?</li>
+<li>Kan du använda 50 %, 25 % eller 10 % som hjälp?</li>
+<li>Hur kan du uppskatta svaret först?</li>
+<li>Kan du visa med en annan representation?</li>
+<li>Vad händer om helheten förändras?</li>
+</ul>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Exit ticket</h3>
+
+<ol>
+<li>
+Skriv 40 % som bråk och decimalform.
+</li>
+
+<li>
+Förklara med ord hur du skulle beräkna 25 % av 120.
+</li>
+</ol>
+
+<button class="print-btn no-print" onclick="window.print()">
+🖨️ Skriv ut sidan
+</button>
+
+</div>
+
+
+<footer>
+Matematik som sitter kvar • Procent • Matematikdidaktisk bank 4–9
+</footer>
+
+</main>
+
+
+<script>
+
+document.querySelectorAll(".accordion button").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    const box = button.parentElement;
+    box.classList.toggle("open");
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
