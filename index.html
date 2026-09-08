@@ -1,0 +1,2520 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Matematik som sitter kvar 4–9</title>
+
+<style>
+
+:root{
+  --bg:#f4f1e9;
+  --paper:#ffffff;
+  --green:#587464;
+  --green-dark:#385449;
+  --green-light:#dfe9e2;
+  --beige:#ebe1cf;
+  --beige-light:#f8f4ec;
+  --blue:#dde8ee;
+  --purple:#e7e1ef;
+  --yellow:#f2e9c8;
+  --rose:#efe0dd;
+  --text:#25312c;
+  --muted:#66716c;
+  --border:#d7ddd8;
+  --shadow:0 5px 18px rgba(30,50,40,.08);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
+
+/* HEADER */
+
+header{
+  background:linear-gradient(135deg,#3e5d50,#617d6e);
+  color:white;
+  padding:28px 25px 24px;
+}
+
+.header-inner{
+  max-width:1300px;
+  margin:auto;
+}
+
+header h1{
+  margin:0;
+  font-size:34px;
+}
+
+header p{
+  max-width:850px;
+  margin:8px 0 0;
+  font-size:17px;
+  opacity:.95;
+}
+
+/* NAVIGATION */
+
+nav{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+
+.nav-inner{
+  max-width:1300px;
+  margin:auto;
+  display:flex;
+  gap:5px;
+  padding:8px 15px;
+  overflow-x:auto;
+}
+
+.nav-btn{
+  border:none;
+  background:white;
+  padding:11px 14px;
+  border-radius:9px;
+  cursor:pointer;
+  white-space:nowrap;
+  font-size:14px;
+  color:var(--text);
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+  background:var(--green-light);
+  color:var(--green-dark);
+  font-weight:bold;
+}
+
+/* MAIN */
+
+main{
+  max-width:1300px;
+  margin:0 auto;
+  padding:25px 18px 80px;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+.page-title{
+  margin-top:0;
+  font-size:30px;
+  color:var(--green-dark);
+}
+
+.intro{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+}
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(135deg,var(--beige-light),#e3ece6);
+  padding:28px;
+  border-radius:20px;
+  margin-bottom:25px;
+  border:1px solid var(--border);
+}
+
+.hero h2{
+  margin-top:0;
+  font-size:30px;
+}
+
+.flow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:18px;
+}
+
+.flow span{
+  background:white;
+  padding:10px 14px;
+  border-radius:25px;
+  font-weight:bold;
+  box-shadow:var(--shadow);
+}
+
+/* GRID */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+
+.card h3{
+  margin-top:0;
+  color:var(--green-dark);
+}
+
+.card h4{
+  margin-bottom:5px;
+}
+
+.icon{
+  font-size:30px;
+}
+
+/* HOME CARDS */
+
+.home-card{
+  cursor:pointer;
+  transition:.2s;
+}
+
+.home-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 22px rgba(30,50,40,.13);
+}
+
+/* BUTTONS */
+
+button{
+  font-family:inherit;
+}
+
+.primary-btn{
+  background:var(--green);
+  color:white;
+  border:none;
+  border-radius:9px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.primary-btn:hover{
+  background:var(--green-dark);
+}
+
+.secondary-btn{
+  background:white;
+  color:var(--green-dark);
+  border:1px solid var(--green);
+  border-radius:9px;
+  padding:10px 15px;
+  cursor:pointer;
+}
+
+/* FILTER */
+
+.toolbar{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+.toolbar input,
+.toolbar select{
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  min-width:190px;
+}
+
+/* TOPIC */
+
+.topic{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  margin-bottom:13px;
+  overflow:hidden;
+}
+
+.topic-header{
+  width:100%;
+  background:white;
+  border:none;
+  padding:17px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-align:left;
+  cursor:pointer;
+  font-size:18px;
+  color:var(--green-dark);
+  font-weight:bold;
+}
+
+.topic-header:hover{
+  background:var(--beige-light);
+}
+
+.topic-content{
+  display:none;
+  padding:0 20px 22px;
+}
+
+.topic.open .topic-content{
+  display:block;
+}
+
+.topic.open .arrow{
+  transform:rotate(180deg);
+}
+
+.arrow{
+  transition:.2s;
+}
+
+/* DIDACTIC BOXES */
+
+.box{
+  border-radius:11px;
+  padding:14px;
+  margin:10px 0;
+}
+
+.understand{
+  background:var(--green-light);
+}
+
+.talk{
+  background:var(--blue);
+}
+
+.connection{
+  background:var(--yellow);
+}
+
+.think{
+  background:var(--purple);
+}
+
+.support{
+  background:var(--rose);
+}
+
+/* TAGS */
+
+.tag{
+  display:inline-block;
+  padding:4px 9px;
+  border-radius:20px;
+  margin:2px;
+  background:var(--green-light);
+  font-size:12px;
+}
+
+/* CONNECTION MAP */
+
+.connection-chain{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:25px 5px;
+}
+
+.connection-node{
+  background:white;
+  border:2px solid var(--green);
+  padding:15px 18px;
+  border-radius:13px;
+  font-weight:bold;
+  text-align:center;
+  min-width:135px;
+}
+
+.connection-arrow{
+  font-size:25px;
+  color:var(--green);
+}
+
+.connection-info{
+  max-width:850px;
+  margin:0 auto;
+}
+
+/* TALK CARDS */
+
+.talk-card{
+  background:white;
+  border-left:7px solid var(--green);
+  padding:18px;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+
+.sentence-starter{
+  font-size:17px;
+  font-weight:bold;
+  color:var(--green-dark);
+}
+
+/* ACTIVITY */
+
+.activity{
+  background:white;
+  padding:22px;
+  border-radius:15px;
+  box-shadow:var(--shadow);
+  margin-top:20px;
+}
+
+.activity-step{
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.activity-step:last-child{
+  border-bottom:none;
+}
+
+/* LESSON BUILDER */
+
+.builder{
+  background:white;
+  border-radius:16px;
+  padding:22px;
+  box-shadow:var(--shadow);
+}
+
+.builder-controls{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+}
+
+.builder select{
+  width:100%;
+  padding:11px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  margin-top:5px;
+}
+
+.lesson-output{
+  display:none;
+  margin-top:22px;
+  background:var(--beige-light);
+  border-radius:14px;
+  padding:20px;
+}
+
+.lesson-output.show{
+  display:block;
+}
+
+/* MEMORY */
+
+.memory-question{
+  background:white;
+  border-left:6px solid var(--green);
+  padding:15px;
+  margin:10px 0;
+  border-radius:9px;
+}
+
+.memory-number{
+  display:inline-flex;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  align-items:center;
+  justify-content:center;
+  background:var(--green);
+  color:white;
+  font-weight:bold;
+  margin-right:8px;
+}
+
+/* TEACHER SUPPORT */
+
+.teacher-principle{
+  padding:15px;
+  background:white;
+  margin-bottom:12px;
+  border-radius:12px;
+  border-left:6px solid var(--green);
+}
+
+/* SEARCH EMPTY */
+
+.hidden-by-filter{
+  display:none!important;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:50px;
+}
+
+/* PRINT */
+
+@media print{
+
+  nav,
+  .no-print,
+  header{
+    display:none!important;
+  }
+
+  body{
+    background:white;
+  }
+
+  main{
+    padding:0;
+  }
+
+  .section{
+    display:none!important;
+  }
+
+  .section.active{
+    display:block!important;
+  }
+
+  .card,
+  .activity,
+  .builder{
+    box-shadow:none;
+    break-inside:avoid;
+  }
+
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+  header h1{
+    font-size:27px;
+  }
+
+  .page-title{
+    font-size:25px;
+  }
+
+  .connection-arrow{
+    transform:rotate(90deg);
+    width:100%;
+    text-align:center;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+
+<h1>🧠 Matematik som sitter kvar</h1>
+
+<p>
+En matematikdidaktisk bank för årskurs 4–9 där elever utvecklar
+förståelse, matematiskt språk, samband, problemlösning och kunskaper
+som återkommer över tid.
+</p>
+
+</div>
+</header>
+
+
+<nav class="no-print">
+<div class="nav-inner">
+
+<button class="nav-btn active" data-section="home">🏠 Start</button>
+<button class="nav-btn" data-section="areas">🔢 Områden</button>
+<button class="nav-btn" data-section="connections">🔗 Samband</button>
+<button class="nav-btn" data-section="talk">💬 Prata matematik</button>
+<button class="nav-btn" data-section="schoenfeld">🧠 Tänka matematiskt</button>
+<button class="nav-btn" data-section="memory">🔄 Matematikminne</button>
+<button class="nav-btn" data-section="lesson">📚 Lektion</button>
+<button class="nav-btn" data-section="support">🧩 NPF & språk</button>
+<button class="nav-btn" data-section="teacher">👩‍🏫 Lärarstöd</button>
+
+</div>
+</nav>
+
+
+<main>
+
+<!-- START -->
+
+<section id="home" class="section active">
+
+<div class="hero">
+
+<h2>Från att göra matematik till att förstå matematik</h2>
+
+<p>
+Målet är inte att eleven ska kunna en metod under ett kapitel.
+Målet är att eleven ska förstå den matematiska idén,
+kunna förklara den och känna igen när den behövs igen.
+</p>
+
+<div class="flow">
+<span>FÖRSTÅ</span>
+<span>→</span>
+<span>PRATA</span>
+<span>→</span>
+<span>VISA</span>
+<span>→</span>
+<span>RESONERA</span>
+<span>→</span>
+<span>ANVÄNDA</span>
+<span>→</span>
+<span>ÅTERKALLA</span>
+</div>
+
+</div>
+
+
+<h2 class="page-title">Vad vill du arbeta med?</h2>
+
+<div class="grid">
+
+<div class="card home-card" onclick="goTo('areas')">
+<div class="icon">🔢</div>
+<h3>Matematiska områden</h3>
+<p>
+Taluppfattning, bråk, procent, proportionalitet,
+algebra, geometri och mer.
+</p>
+</div>
+
+
+<div class="card home-card" onclick="goTo('connections')">
+<div class="icon">🔗</div>
+<h3>Se sambanden</h3>
+<p>
+Synliggör hur matematiken i årskurs 4–6
+bygger grunden för årskurs 7–9.
+</p>
+</div>
+
+
+<div class="card home-card" onclick="goTo('talk')">
+<div class="icon">💬</div>
+<h3>Prata matematik</h3>
+<p>
+Samtalsfrågor som får eleverna att förklara,
+jämföra, argumentera och generalisera.
+</p>
+</div>
+
+
+<div class="card home-card" onclick="goTo('schoenfeld')">
+<div class="icon">🧠</div>
+<h3>Tänka som matematiker</h3>
+<p>
+Strategier och metakognitiva frågor inspirerade
+av Alan Schoenfeld.
+</p>
+</div>
+
+
+<div class="card home-card" onclick="goTo('memory')">
+<div class="icon">🔄</div>
+<h3>Matematikminne</h3>
+<p>
+Kort återkommande träning för att tidigare
+kunskaper ska förbli tillgängliga.
+</p>
+</div>
+
+
+<div class="card home-card" onclick="goTo('lesson')">
+<div class="icon">📚</div>
+<h3>Bygg en lektion</h3>
+<p>
+Välj område och lektionstid och få en enkel
+didaktisk lektionsstruktur.
+</p>
+</div>
+
+
+<div class="card home-card" onclick="goTo('support')">
+<div class="icon">🧩</div>
+<h3>NPF & språkstöd</h3>
+<p>
+Strukturer som gör matematiska samtal
+tillgängliga för fler elever.
+</p>
+</div>
+
+
+<div class="card home-card" onclick="goTo('teacher')">
+<div class="icon">👩‍🏫</div>
+<h3>Lärarstöd</h3>
+<p>
+Vad ska läraren lyssna efter och vilka frågor
+för matematiken vidare?
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- OMRÅDEN -->
+
+<section id="areas" class="section">
+
+<h2 class="page-title">🔢 Matematiska områden</h2>
+
+<div class="intro">
+Här utgår vi från de <strong>matematiska idéerna</strong>, inte bara från metoderna.
+Varje område innehåller förståelse, representationer, samtal och samband.
+</div>
+
+
+<div class="toolbar no-print">
+
+<input
+type="text"
+id="areaSearch"
+placeholder="Sök t.ex. bråk, procent..."
+oninput="filterAreas()">
+
+<select id="gradeFilter" onchange="filterAreas()">
+<option value="alla">Alla årskurser</option>
+<option value="4-6">Åk 4–6</option>
+<option value="7-9">Åk 7–9</option>
+</select>
+
+</div>
+
+
+<!-- TALUPPFATTNING -->
+
+<div class="topic math-topic" data-search="taluppfattning tal tallinje position decimal negativa" data-grade="4-6 7-9">
+
+<button class="topic-header">
+<span>🔢 Taluppfattning</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="topic-content">
+
+<div class="box understand">
+<strong>Eleven behöver förstå:</strong>
+<p>
+Tal beskriver storlek och relationer.
+En siffras värde beror på dess position och tal kan representeras på flera sätt.
+</p>
+</div>
+
+<h4>Representationer</h4>
+
+<span class="tag">Tallinje</span>
+<span class="tag">Positionssystem</span>
+<span class="tag">Symbol</span>
+<span class="tag">Bild</span>
+<span class="tag">Ord</span>
+
+
+<div class="box talk">
+
+<strong>Prata matematik</strong>
+
+<p>Vilket tal ligger närmast 1?</p>
+
+<p><strong>0,9 &nbsp; 1,08 &nbsp; 0,89</strong></p>
+
+<ul>
+<li>Hur tänkte du?</li>
+<li>Kan du visa det på en tallinje?</li>
+<li>Finns det ett annat sätt att avgöra?</li>
+</ul>
+
+</div>
+
+
+<div class="box connection">
+
+<strong>Samband vidare:</strong>
+
+<p>
+Taluppfattning → decimaler → bråk → procent →
+proportionalitet → algebra.
+</p>
+
+</div>
+
+</div>
+</div>
+
+
+
+<!-- BRÅK -->
+
+<div class="topic math-topic" data-search="bråk täljare nämnare ekvivalenta förlänga förkorta tallinje" data-grade="4-6 7-9">
+
+<button class="topic-header">
+<span>🍕 Bråk</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="topic-content">
+
+<div class="box understand">
+
+<strong>Eleven behöver förstå:</strong>
+
+<p>
+Ett bråk är ett tal.
+Bråket beskriver en relation mellan täljare och nämnare.
+Olika bråk kan ha samma värde.
+</p>
+
+</div>
+
+
+<h4>Representationer</h4>
+
+<span class="tag">Del av helhet</span>
+<span class="tag">Tallinje</span>
+<span class="tag">Bråkform</span>
+<span class="tag">Decimalform</span>
+<span class="tag">Procent</span>
+
+
+<div class="box talk">
+
+<strong>Prata matematik</strong>
+
+<p>Vilket är störst?</p>
+
+<h3>3/4 eller 5/8</h3>
+
+<ul>
+<li>Förklara utan att börja med en regel.</li>
+<li>Visa med bild.</li>
+<li>Visa på tallinje.</li>
+<li>Kan du koppla bråken till procent?</li>
+</ul>
+
+</div>
+
+
+<div class="box think">
+
+<strong>Vanligt tankespår</strong>
+
+<p>
+”1/8 är större än 1/6 eftersom 8 är större än 6.”
+</p>
+
+<p>
+Fråga eleven:
+<strong>Vad händer med delarna när samma helhet delas i fler delar?</strong>
+</p>
+
+</div>
+
+
+<div class="box connection">
+
+<strong>Samband vidare:</strong>
+
+<p>
+Bråk ↔ division ↔ decimalform ↔ procent ↔
+förhållande ↔ proportionalitet.
+</p>
+
+</div>
+
+</div>
+</div>
+
+
+
+<!-- DECIMAL / PROCENT -->
+
+<div class="topic math-topic" data-search="decimal procent hundradel tiondel bråk förändring rabatt" data-grade="4-6 7-9">
+
+<button class="topic-header">
+<span>💯 Bråk – decimal – procent</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="topic-content">
+
+<div class="box understand">
+
+<strong>Eleven behöver förstå:</strong>
+
+<p>
+Bråk, decimalform och procent kan beskriva samma värde
+med olika representationer.
+</p>
+
+</div>
+
+
+<div class="box talk">
+
+<strong>Prata matematik</strong>
+
+<p>Vilka hör ihop?</p>
+
+<p>
+<strong>
+1/2 &nbsp;&nbsp;
+0,25 &nbsp;&nbsp;
+75 % &nbsp;&nbsp;
+3/4 &nbsp;&nbsp;
+50 % &nbsp;&nbsp;
+1/4
+</strong>
+</p>
+
+<p>
+Förklara hur du vet.
+</p>
+
+</div>
+
+
+<div class="box connection">
+
+<strong>Bygger vidare mot:</strong>
+
+<p>
+Procentuell förändring, proportionalitet,
+ränta, skala och algebra.
+</p>
+
+</div>
+
+</div>
+</div>
+
+
+
+<!-- PROPORTIONALITET -->
+
+<div class="topic math-topic" data-search="proportionalitet proportion förhållande skala hastighet jämförpris" data-grade="4-6 7-9">
+
+<button class="topic-header">
+<span>⚖️ Proportionalitet</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="topic-content">
+
+<div class="box understand">
+
+<strong>Eleven behöver förstå:</strong>
+
+<p>
+Två storheter kan förändras i ett bestämt förhållande.
+Om den ena fördubblas kan den andra exempelvis fördubblas.
+</p>
+
+</div>
+
+
+<div class="box talk">
+
+<strong>Prata matematik</strong>
+
+<p>
+2 personer behöver 3 dl ris.
+Hur mycket behövs till 6 personer?
+</p>
+
+<ul>
+<li>Hur ser sambandet ut?</li>
+<li>Kan du visa med tabell?</li>
+<li>Kan du visa med ett uttryck?</li>
+<li>Vad händer om vi istället är 5 personer?</li>
+</ul>
+
+</div>
+
+
+<div class="box connection">
+
+<strong>Samband:</strong>
+
+<p>
+Multiplikation → division → bråk →
+förhållande → procent → proportionalitet → funktioner.
+</p>
+
+</div>
+
+</div>
+</div>
+
+
+
+<!-- ALGEBRA -->
+
+<div class="topic math-topic" data-search="algebra likhetstecken variabel uttryck ekvation mönster" data-grade="4-6 7-9">
+
+<button class="topic-header">
+<span>🔡 Algebra</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="topic-content">
+
+<div class="box understand">
+
+<strong>Eleven behöver förstå:</strong>
+
+<p>
+Algebra beskriver relationer och generaliseringar.
+Likhetstecknet betyder att uttrycken på båda sidor har samma värde.
+</p>
+
+</div>
+
+
+<div class="box talk">
+
+<strong>Prata matematik</strong>
+
+<p>Vad kan stå i rutan?</p>
+
+<h3>8 + 4 = □ + 5</h3>
+
+<ul>
+<li>Hur vet du?</li>
+<li>Vad betyder likhetstecknet?</li>
+<li>Kan vi skriva samma idé med en bokstav?</li>
+</ul>
+
+</div>
+
+
+<div class="box connection">
+
+<strong>Röd tråd:</strong>
+
+<p>
+7 + 3 = 10
+→ 7 + 3 = 6 + 4
+→ 7 + □ = 15
+→ 7 + x = 15
+→ 3x + 7 = 22
+</p>
+
+</div>
+
+</div>
+</div>
+
+
+
+<!-- GEOMETRI -->
+
+<div class="topic math-topic" data-search="geometri omkrets area volym vinklar former längd" data-grade="4-6 7-9">
+
+<button class="topic-header">
+<span>📐 Geometri</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="topic-content">
+
+<div class="box understand">
+
+<strong>Eleven behöver förstå:</strong>
+
+<p>
+Geometriska mått beskriver olika egenskaper.
+Omkrets beskriver längden runt en figur medan area beskriver ytan.
+</p>
+
+</div>
+
+
+<div class="box talk">
+
+<strong>Prata matematik</strong>
+
+<p>
+Kan två rektanglar ha samma area men olika omkrets?
+</p>
+
+<ul>
+<li>Visa ett exempel.</li>
+<li>Kan du hitta fler?</li>
+<li>Vad förändras?</li>
+<li>Vad är oförändrat?</li>
+</ul>
+
+</div>
+
+</div>
+</div>
+
+
+
+<!-- STATISTIK -->
+
+<div class="topic math-topic" data-search="statistik diagram medelvärde median data tabell" data-grade="4-6 7-9">
+
+<button class="topic-header">
+<span>📊 Statistik</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="topic-content">
+
+<div class="box understand">
+
+<strong>Eleven behöver förstå:</strong>
+
+<p>
+Statistik handlar om att samla, beskriva,
+tolka och värdera information.
+</p>
+
+</div>
+
+
+<div class="box talk">
+
+<strong>Prata matematik</strong>
+
+<p>
+Två grupper har samma medelvärde.
+Betyder det att resultaten ser likadana ut?
+</p>
+
+<p>
+Förklara och skapa två exempel.
+</p>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- PROBLEMLÖSNING -->
+
+<div class="topic math-topic" data-search="problemlösning strategi resonemang problem metod schoenfeld" data-grade="4-6 7-9">
+
+<button class="topic-header">
+<span>🧩 Problemlösning</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="topic-content">
+
+<div class="box understand">
+
+<strong>Eleven behöver förstå:</strong>
+
+<p>
+Problemlösning handlar inte bara om att välja en räkneoperation.
+Eleven behöver förstå problemet, välja strategi,
+övervaka arbetet och värdera lösningen.
+</p>
+
+</div>
+
+<div class="box talk">
+
+<strong>Prata matematik</strong>
+
+<ul>
+<li>Vad vet vi?</li>
+<li>Vad behöver vi ta reda på?</li>
+<li>Vilken information är viktig?</li>
+<li>Vilken strategi skulle kunna fungera?</li>
+<li>Hur vet vi om svaret är rimligt?</li>
+</ul>
+
+</div>
+
+</div>
+</div>
+
+
+</section>
+
+
+
+<!-- SAMBAND -->
+
+<section id="connections" class="section">
+
+<h2 class="page-title">🔗 Matematiska samband</h2>
+
+<div class="intro">
+
+Matematiken ska inte upplevas som separata kapitel.
+Här synliggör vi hur en idé bygger vidare till nästa.
+
+</div>
+
+
+<h3 style="text-align:center;">En central utvecklingskedja 4–9</h3>
+
+<div class="connection-chain">
+
+<div class="connection-node">
+Division
+</div>
+
+<div class="connection-arrow">→</div>
+
+<div class="connection-node">
+Bråk
+</div>
+
+<div class="connection-arrow">→</div>
+
+<div class="connection-node">
+Decimalform
+</div>
+
+<div class="connection-arrow">→</div>
+
+<div class="connection-node">
+Procent
+</div>
+
+<div class="connection-arrow">→</div>
+
+<div class="connection-node">
+Förhållande
+</div>
+
+<div class="connection-arrow">→</div>
+
+<div class="connection-node">
+Proportionalitet
+</div>
+
+<div class="connection-arrow">→</div>
+
+<div class="connection-node">
+Algebra
+</div>
+
+</div>
+
+
+<div class="connection-info">
+
+<div class="card">
+
+<h3>Exempel: 3 ÷ 4</h3>
+
+<p>
+Eleven kan möta samma matematiska relation på flera sätt:
+</p>
+
+<p>
+<strong>
+3 ÷ 4 = 3/4 = 0,75 = 75 %
+</strong>
+</p>
+
+<p>
+Poängen är inte bara att eleven kan omvandla mellan formerna.
+Eleven ska förstå att representationerna beskriver
+<strong>samma matematiska värde</strong>.
+</p>
+
+</div>
+
+
+<div class="card" style="margin-top:15px;">
+
+<h3>Frågor som bygger samband</h3>
+
+<ul>
+<li>Vad påminner detta om?</li>
+<li>Var har vi sett samma idé tidigare?</li>
+<li>Kan detta visas som bråk?</li>
+<li>Kan detta visas på en tallinje?</li>
+<li>Hur hänger detta ihop med procent?</li>
+<li>Hur skulle vi kunna skriva sambandet med en variabel?</li>
+<li>Vad förändras och vad är oförändrat?</li>
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PRATA MATEMATIK -->
+
+<section id="talk" class="section">
+
+<h2 class="page-title">💬 Prata matematik</h2>
+
+<div class="intro">
+
+Matematiska samtal ska inte bara innebära
+”berätta hur du gjorde”.
+Eleverna behöver olika typer av frågor som utvecklar olika delar
+av det matematiska tänkandet.
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="talk-card">
+
+<h3>👀 Observera</h3>
+
+<p class="sentence-starter">
+Vad lägger du märke till?
+</p>
+
+<p>
+Vad ser du?<br>
+Vad verkar vara viktigt?<br>
+Finns det något mönster?
+</p>
+
+</div>
+
+
+<div class="talk-card">
+
+<h3>🗣️ Förklara</h3>
+
+<p class="sentence-starter">
+Hur tänkte du?
+</p>
+
+<p>
+Förklara steg för steg.<br>
+Varför valde du den strategin?
+</p>
+
+</div>
+
+
+<div class="talk-card">
+
+<h3>🧱 Representera</h3>
+
+<p class="sentence-starter">
+Kan du visa på ett annat sätt?
+</p>
+
+<p>
+Med bild?<br>
+Tallinje?<br>
+Tabell?<br>
+Symboler?<br>
+Material?
+</p>
+
+</div>
+
+
+<div class="talk-card">
+
+<h3>⚖️ Jämför</h3>
+
+<p class="sentence-starter">
+Vad är lika och vad är olika?
+</p>
+
+<p>
+Vilken strategi är effektivast?<br>
+När fungerar respektive strategi?
+</p>
+
+</div>
+
+
+<div class="talk-card">
+
+<h3>🔍 Utmana</h3>
+
+<p class="sentence-starter">
+Är det alltid så?
+</p>
+
+<p>
+Kan du hitta ett exempel där det inte fungerar?<br>
+Hur skulle du övertyga någon annan?
+</p>
+
+</div>
+
+
+<div class="talk-card">
+
+<h3>🔗 Samband</h3>
+
+<p class="sentence-starter">
+Vad påminner detta om?
+</p>
+
+<p>
+Vilken tidigare matematik använder vi?<br>
+Hur hänger idéerna ihop?
+</p>
+
+</div>
+
+
+<div class="talk-card">
+
+<h3>🧠 Generalisera</h3>
+
+<p class="sentence-starter">
+Kan vi beskriva en regel?
+</p>
+
+<p>
+Vad händer alltid?<br>
+Hur skulle vi skriva det med matematiska symboler?
+</p>
+
+</div>
+
+
+<div class="talk-card">
+
+<h3>✅ Rimlighet</h3>
+
+<p class="sentence-starter">
+Hur vet vi att detta verkar rimligt?
+</p>
+
+<p>
+Kan vi uppskatta svaret?<br>
+Kan vi kontrollera på något annat sätt?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<h3>🎴 Samtalsstruktur för grupper</h3>
+
+<p>
+Ge gruppen <strong>en matematisk uppgift</strong> och ett stort papper
+eller en whiteboard.
+</p>
+
+
+<div class="activity-step">
+
+<strong>1. Tänk själv</strong>
+
+<p>
+Alla får en kort stund att fundera innan någon börjar prata.
+</p>
+
+</div>
+
+
+<div class="activity-step">
+
+<strong>2. Visa</strong>
+
+<p>
+Varje elev visar hur hen började tänka.
+</p>
+
+</div>
+
+
+<div class="activity-step">
+
+<strong>3. Jämför</strong>
+
+<p>
+Gruppen undersöker likheter och skillnader mellan strategierna.
+</p>
+
+</div>
+
+
+<div class="activity-step">
+
+<strong>4. Välj representation</strong>
+
+<p>
+Gruppen visar sin idé med exempelvis bild, tallinje,
+tabell eller symboler.
+</p>
+
+</div>
+
+
+<div class="activity-step">
+
+<strong>5. Förklara</strong>
+
+<p>
+Gruppen formulerar tillsammans:
+<strong>”Vi tänker så här eftersom…”</strong>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- SCHOENFELD -->
+
+<section id="schoenfeld" class="section">
+
+<h2 class="page-title">🧠 Tänka som en matematiker</h2>
+
+<div class="intro">
+
+Inspirerat av Alan Schoenfeld.
+Eleven behöver inte bara matematiska kunskaper utan också
+strategier för att planera, övervaka och värdera sitt arbete.
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<div class="icon">1️⃣</div>
+
+<h3>Förstå problemet</h3>
+
+<ul>
+<li>Vad vet jag?</li>
+<li>Vad ska jag ta reda på?</li>
+<li>Vilken information är viktig?</li>
+<li>Kan jag säga problemet med egna ord?</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">2️⃣</div>
+
+<h3>Planera</h3>
+
+<ul>
+<li>Vad påminner problemet om?</li>
+<li>Kan jag rita?</li>
+<li>Kan jag göra en tabell?</li>
+<li>Kan jag prova enklare tal?</li>
+<li>Kan jag börja bakifrån?</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">3️⃣</div>
+
+<h3>Övervaka</h3>
+
+<ul>
+<li>Fungerar min strategi?</li>
+<li>Är jag på väg mot det jag söker?</li>
+<li>Behöver jag ändra strategi?</li>
+<li>Finns det något jag har missat?</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">4️⃣</div>
+
+<h3>Granska</h3>
+
+<ul>
+<li>Är svaret rimligt?</li>
+<li>Kan jag kontrollera det?</li>
+<li>Finns det en annan lösning?</li>
+<li>Vad lärde jag mig av problemet?</li>
+</ul>
+
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Problemlösningsrutin</h3>
+
+<p>
+Låt dessa fyra frågor finnas synliga vid problemlösning
+i flera årskurser.
+</p>
+
+<div class="box think">
+<strong>Vad vet jag?</strong>
+</div>
+
+<div class="box think">
+<strong>Vad kan jag prova?</strong>
+</div>
+
+<div class="box think">
+<strong>Fungerar min idé?</strong>
+</div>
+
+<div class="box think">
+<strong>Är lösningen rimlig?</strong>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- MEMORY -->
+
+<section id="memory" class="section">
+
+<h2 class="page-title">🔄 Veckans matematikminne</h2>
+
+<div class="intro">
+
+Tidigare matematik ska regelbundet komma tillbaka.
+Eleven behöver hämta fram kunskapen utan att alltid få veta
+vilken metod eller vilket område som ska användas.
+
+</div>
+
+
+<div class="card">
+
+<h3>Exempel – årskurs 6</h3>
+
+<div class="memory-question">
+
+<span class="memory-number">1</span>
+
+<strong>Denna vecka</strong>
+
+<p>
+Vilket är störst: 5/6 eller 7/9?
+Förklara hur du vet.
+</p>
+
+</div>
+
+
+<div class="memory-question">
+
+<span class="memory-number">2</span>
+
+<strong>Tidigare område</strong>
+
+<p>
+Skriv 0,35 som bråk och procent.
+</p>
+
+</div>
+
+
+<div class="memory-question">
+
+<span class="memory-number">3</span>
+
+<strong>Äldre kunskap</strong>
+
+<p>
+Vilket tal saknas?
+<br>
+7 × ___ = 56
+</p>
+
+</div>
+
+
+<div class="memory-question">
+
+<span class="memory-number">4</span>
+
+<strong>Samband</strong>
+
+<p>
+En vara kostar 400 kr och priset sänks med 25 %.
+Hur kan problemet lösas på minst två olika sätt?
+</p>
+
+</div>
+
+
+<div class="memory-question">
+
+<span class="memory-number">5</span>
+
+<strong>Resonemang</strong>
+
+<p>
+Sam säger:
+”1/5 är större än 1/4 eftersom 5 är större än 4.”
+<br><br>
+Hur skulle du hjälpa Sam att tänka vidare?
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:16px;">
+
+<h3>Grundstruktur varje vecka</h3>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr>
+<td style="padding:9px;border-bottom:1px solid #ddd;">
+<strong>Fråga 1</strong>
+</td>
+<td style="padding:9px;border-bottom:1px solid #ddd;">
+Nytt innehåll
+</td>
+</tr>
+
+<tr>
+<td style="padding:9px;border-bottom:1px solid #ddd;">
+<strong>Fråga 2</strong>
+</td>
+<td style="padding:9px;border-bottom:1px solid #ddd;">
+1–3 veckor tillbaka
+</td>
+</tr>
+
+<tr>
+<td style="padding:9px;border-bottom:1px solid #ddd;">
+<strong>Fråga 3</strong>
+</td>
+<td style="padding:9px;border-bottom:1px solid #ddd;">
+Tidigare termin/årskurs
+</td>
+</tr>
+
+<tr>
+<td style="padding:9px;border-bottom:1px solid #ddd;">
+<strong>Fråga 4</strong>
+</td>
+<td style="padding:9px;border-bottom:1px solid #ddd;">
+Samband mellan områden
+</td>
+</tr>
+
+<tr>
+<td style="padding:9px;">
+<strong>Fråga 5</strong>
+</td>
+<td style="padding:9px;">
+Förklara eller resonera
+</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+<!-- LEKTIONSBYGGARE -->
+
+<section id="lesson" class="section">
+
+<h2 class="page-title">📚 Bygg en matematiklektion</h2>
+
+<div class="intro">
+
+Välj område och lektionstid.
+Plattformen skapar en grundstruktur där
+matematiskt samtal och tidigare kunskap alltid finns med.
+
+</div>
+
+
+<div class="builder">
+
+<div class="builder-controls">
+
+<div>
+<label><strong>Årskurs</strong></label>
+<select id="lessonGrade">
+<option>Åk 4</option>
+<option>Åk 5</option>
+<option selected>Åk 6</option>
+<option>Åk 7</option>
+<option>Åk 8</option>
+<option>Åk 9</option>
+</select>
+</div>
+
+
+<div>
+<label><strong>Område</strong></label>
+<select id="lessonArea">
+<option>Taluppfattning</option>
+<option selected>Bråk</option>
+<option>Decimal och procent</option>
+<option>Proportionalitet</option>
+<option>Algebra</option>
+<option>Geometri</option>
+<option>Statistik</option>
+<option>Problemlösning</option>
+</select>
+</div>
+
+
+<div>
+<label><strong>Lektionstid</strong></label>
+<select id="lessonTime">
+<option value="20">20 minuter</option>
+<option value="40">40 minuter</option>
+<option value="45" selected>45 minuter</option>
+<option value="60">60 minuter</option>
+</select>
+</div>
+
+</div>
+
+
+<br>
+
+<button class="primary-btn" onclick="buildLesson()">
+Skapa lektionsstruktur
+</button>
+
+
+<div id="lessonOutput" class="lesson-output"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- SUPPORT -->
+
+<section id="support" class="section">
+
+<h2 class="page-title">🧩 NPF & språkstöd</h2>
+
+<div class="intro">
+
+Stödet ska ligga inne i undervisningen,
+inte som ett separat material vid sidan av.
+
+</div>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>🗣️ Språkstarter</h3>
+
+<p>
+<strong>Jag tror att _____ eftersom _____.</strong>
+</p>
+
+<p>
+<strong>Jag håller med _____ därför att _____.</strong>
+</p>
+
+<p>
+<strong>Jag tänkte först _____ men sedan _____.</strong>
+</p>
+
+<p>
+<strong>Sambandet mellan _____ och _____ är _____.</strong>
+</p>
+
+<p>
+<strong>Min strategi fungerar eftersom _____.</strong>
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>👁️ Visuellt stöd</h3>
+
+<ul>
+<li>En instruktion åt gången.</li>
+<li>Visa exempel visuellt.</li>
+<li>Markera viktig information.</li>
+<li>Använd samma symboler återkommande.</li>
+<li>Visa vad eleven ska börja med.</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h3>🧠 Kognitiv avlastning</h3>
+
+<ul>
+<li>Kortare text.</li>
+<li>Färre uppgifter samtidigt.</li>
+<li>Tydlig ordning.</li>
+<li>Arbetsyta utan onödig information.</li>
+<li>Möjlighet till mikropauser.</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h3>🧱 Flera sätt att uttrycka förståelse</h3>
+
+<p>Eleven kan:</p>
+
+<ul>
+<li>säga</li>
+<li>rita</li>
+<li>bygga</li>
+<li>skriva</li>
+<li>peka</li>
+<li>använda symboler</li>
+<li>visa på tallinje</li>
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h3>📖 Begrepp före uppgiften</h3>
+
+<p>
+Välj 3–5 centrala matematiska ord.
+</p>
+
+<p>
+Exempel vid bråk:
+</p>
+
+<span class="tag">täljare</span>
+<span class="tag">nämnare</span>
+<span class="tag">värde</span>
+<span class="tag">helhet</span>
+<span class="tag">motsvarar</span>
+
+</div>
+
+
+<div class="card">
+
+<h3>🤝 Samtal i par före helklass</h3>
+
+<p>
+Låt eleverna formulera sin tanke tillsammans
+innan de förväntas tala inför hela klassen.
+</p>
+
+<p>
+<strong>Tänk → prata i par → dela.</strong>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- TEACHER -->
+
+<section id="teacher" class="section">
+
+<h2 class="page-title">👩‍🏫 Lärarstöd</h2>
+
+<div class="intro">
+
+Lärarens frågor kan avgöra om lektionen handlar om
+att producera svar eller om att utveckla matematiskt tänkande.
+
+</div>
+
+
+<div class="teacher-principle">
+
+<h3>1. Fråga efter tänkandet före svaret</h3>
+
+<p>
+Istället för:
+<strong>”Vad blir svaret?”</strong>
+</p>
+
+<p>
+Prova:
+<strong>”Vad ser du och hur skulle du börja?”</strong>
+</p>
+
+</div>
+
+
+<div class="teacher-principle">
+
+<h3>2. Be eleven representera</h3>
+
+<p>
+<strong>
+Kan du visa det med bild, tallinje,
+material, tabell eller symboler?
+</strong>
+</p>
+
+</div>
+
+
+<div class="teacher-principle">
+
+<h3>3. Låt strategier mötas</h3>
+
+<p>
+Visa två elevlösningar.
+Fråga:
+</p>
+
+<ul>
+<li>Vad är lika?</li>
+<li>Vad är olika?</li>
+<li>Vilken matematisk idé finns i båda?</li>
+<li>När är den ena strategin mer effektiv?</li>
+</ul>
+
+</div>
+
+
+<div class="teacher-principle">
+
+<h3>4. Använd vanliga tankespår</h3>
+
+<p>
+Undvik att snabbt säga att något är fel.
+Undersök istället:
+</p>
+
+<p>
+<strong>
+”Vad kan eleven ha tänkt här?”
+</strong>
+</p>
+
+</div>
+
+
+<div class="teacher-principle">
+
+<h3>5. Fråga efter samband</h3>
+
+<p>
+Minst en gång under varje lektion:
+</p>
+
+<p>
+<strong>
+”Vad har detta samband med något vi arbetat med tidigare?”
+</strong>
+</p>
+
+</div>
+
+
+<div class="teacher-principle">
+
+<h3>6. Återkalla tidigare matematik</h3>
+
+<p>
+Varje vecka bör eleverna möta matematik
+från tidigare veckor, terminer och årskurser.
+</p>
+
+</div>
+
+
+<div class="teacher-principle">
+
+<h3>7. Lyssna efter förståelse</h3>
+
+<p>
+När eleverna pratar, lyssna efter om de:
+</p>
+
+<ul>
+<li>använder matematiska begrepp</li>
+<li>ser relationer</li>
+<li>kan motivera</li>
+<li>kan byta representation</li>
+<li>kan jämföra strategier</li>
+<li>kan avgöra rimlighet</li>
+</ul>
+
+</div>
+
+
+<div class="teacher-principle">
+
+<h3>8. Avsluta med matematik – inte administration</h3>
+
+<p>
+Avsluta exempelvis med:
+</p>
+
+<ul>
+<li>Vad blev tydligare idag?</li>
+<li>Vilket samband upptäckte du?</li>
+<li>Vilken strategi vill du komma ihåg?</li>
+<li>Vad vill du fortfarande undersöka?</li>
+</ul>
+
+</div>
+
+
+</section>
+
+
+<footer>
+
+Matematik som sitter kvar 4–9 • didaktisk matematikbank
+
+</footer>
+
+</main>
+
+
+
+<script>
+
+/* ============================
+   NAVIGATION
+============================ */
+
+const navButtons = document.querySelectorAll(".nav-btn");
+const sections = document.querySelectorAll(".section");
+
+navButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const sectionId = button.dataset.section;
+
+    showSection(sectionId);
+
+  });
+
+});
+
+
+function showSection(sectionId){
+
+  sections.forEach(section=>{
+    section.classList.remove("active");
+  });
+
+  navButtons.forEach(button=>{
+    button.classList.remove("active");
+  });
+
+  const section = document.getElementById(sectionId);
+
+  if(section){
+    section.classList.add("active");
+  }
+
+  const navButton =
+  document.querySelector('[data-section="'+sectionId+'"]');
+
+  if(navButton){
+    navButton.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function goTo(sectionId){
+
+  showSection(sectionId);
+
+}
+
+
+/* ============================
+   ACCORDION
+============================ */
+
+document.querySelectorAll(".topic-header").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    const topic = button.parentElement;
+
+    topic.classList.toggle("open");
+
+  });
+
+});
+
+
+/* ============================
+   FILTER AREAS
+============================ */
+
+function filterAreas(){
+
+  const search =
+  document.getElementById("areaSearch")
+  .value
+  .toLowerCase()
+  .trim();
+
+  const grade =
+  document.getElementById("gradeFilter").value;
+
+  const topics =
+  document.querySelectorAll(".math-topic");
+
+
+  topics.forEach(topic=>{
+
+    const text =
+    topic.dataset.search.toLowerCase();
+
+    const topicGrades =
+    topic.dataset.grade;
+
+    const searchMatch =
+    text.includes(search);
+
+    const gradeMatch =
+    grade === "alla" ||
+    topicGrades.includes(grade);
+
+
+    if(searchMatch && gradeMatch){
+
+      topic.classList.remove("hidden-by-filter");
+
+    }else{
+
+      topic.classList.add("hidden-by-filter");
+
+    }
+
+  });
+
+}
+
+
+/* ============================
+   LESSON BUILDER
+============================ */
+
+const lessonData = {
+
+"Taluppfattning":{
+start:"Vilket tal hör inte ihop med de andra? 0,5 • 1/2 • 50 % • 0,05",
+talk:"Förklara hur talen hör ihop. Visa gärna på en tallinje.",
+connection:"Koppla talet till bråk, decimalform och procent.",
+exit:"Placera 0,75 på en tallinje och skriv talet på två andra sätt."
+},
+
+"Bråk":{
+start:"Vilket är störst: 3/4 eller 5/8? Tänk först utan att använda en färdig regel.",
+talk:"Visa ditt resonemang med bild, tallinje eller ett annat sätt.",
+connection:"Hur kan bråken skrivas som decimalform eller procent?",
+exit:"Skriv ett bråk som är lika mycket som 3/4 och förklara varför värdet är detsamma."
+},
+
+"Decimal och procent":{
+start:"Vilka hör ihop: 1/2 • 0,25 • 75 % • 3/4 • 50 % • 1/4?",
+talk:"Förklara vilka representationer som beskriver samma värde.",
+connection:"Hur hör procent ihop med bråk och division?",
+exit:"Skriv 0,4 som bråk och procent."
+},
+
+"Proportionalitet":{
+start:"2 personer behöver 3 dl ris. Hur mycket behövs till 6 personer?",
+talk:"Visa sambandet med minst två representationer.",
+connection:"Hur hör problemet ihop med multiplikation, division och bråk?",
+exit:"Om 4 pennor kostar 60 kr, vad kostar 8 pennor? Förklara sambandet."
+},
+
+"Algebra":{
+start:"Vad kan stå i rutan? 8 + 4 = □ + 5",
+talk:"Förklara vad likhetstecknet betyder i uttrycket.",
+connection:"Hur kan samma idé skrivas med en variabel?",
+exit:"Lös 7 + x = 15 och förklara hur du vet."
+},
+
+"Geometri":{
+start:"Kan två rektanglar ha samma area men olika omkrets?",
+talk:"Skapa två exempel och jämför.",
+connection:"Vad förändras och vad är oförändrat?",
+exit:"Rita en rektangel med area 24 cm². Kan du hitta en annan?"
+},
+
+"Statistik":{
+start:"Två grupper har samma medelvärde. Måste gruppernas resultat se likadana ut?",
+talk:"Skapa två exempel och argumentera.",
+connection:"Hur påverkar extrema värden medelvärdet?",
+exit:"Förklara med egna ord vad medelvärde berättar om en datamängd."
+},
+
+"Problemlösning":{
+start:"Läs problemet utan att räkna. Vad vet du och vad behöver du ta reda på?",
+talk:"Vilka olika strategier skulle kunna fungera?",
+connection:"Vilken tidigare matematik behöver du använda?",
+exit:"Vilken strategi använde du och varför fungerade den?"
+}
+
+};
+
+
+function buildLesson(){
+
+  const grade =
+  document.getElementById("lessonGrade").value;
+
+  const area =
+  document.getElementById("lessonArea").value;
+
+  const time =
+  Number(document.getElementById("lessonTime").value);
+
+  const data =
+  lessonData[area];
+
+  let startTime = 5;
+  let exploreTime = Math.max(7,Math.round(time*.35));
+  let talkTime = Math.max(5,Math.round(time*.25));
+  let workTime = Math.max(3,Math.round(time*.20));
+  let exitTime = 5;
+
+  const total =
+  startTime +
+  exploreTime +
+  talkTime +
+  workTime +
+  exitTime;
+
+  if(total > time){
+
+    workTime =
+    Math.max(2,workTime-(total-time));
+
+  }
+
+
+  const html = `
+
+  <h2>${grade} – ${area}</h2>
+
+  <p>
+  <strong>Lektionstid:</strong>
+  cirka ${time} minuter
+  </p>
+
+  <div class="activity-step">
+
+  <h3>🔄 1. Återkallning – ${startTime} min</h3>
+
+  <p>
+  Börja med en kort fråga från tidigare undervisning.
+  Eleverna tänker först själva.
+  </p>
+
+  </div>
+
+
+  <div class="activity-step">
+
+  <h3>👀 2. Startuppgift – ${exploreTime} min</h3>
+
+  <p>
+  <strong>${data.start}</strong>
+  </p>
+
+  <p>
+  Låt eleverna undersöka innan metoder eller regler presenteras.
+  </p>
+
+  </div>
+
+
+  <div class="activity-step">
+
+  <h3>💬 3. Prata matematik – ${talkTime} min</h3>
+
+  <p>
+  ${data.talk}
+  </p>
+
+  <p>
+  Använd frågorna:
+  </p>
+
+  <ul>
+  <li>Hur tänkte du?</li>
+  <li>Kan du visa på ett annat sätt?</li>
+  <li>Vad är lika och olika mellan lösningarna?</li>
+  <li>Hur vet vi att detta är rimligt?</li>
+  </ul>
+
+  </div>
+
+
+  <div class="activity-step">
+
+  <h3>🔗 4. Synliggör sambandet – ${workTime} min</h3>
+
+  <p>
+  <strong>${data.connection}</strong>
+  </p>
+
+  </div>
+
+
+  <div class="activity-step">
+
+  <h3>✅ 5. Exit ticket – ${exitTime} min</h3>
+
+  <p>
+  <strong>${data.exit}</strong>
+  </p>
+
+  </div>
+
+
+  <br>
+
+  <div class="box support">
+
+  <strong>Språkstöd</strong>
+
+  <p>
+  Jag tänkte _____ eftersom _____.<br>
+  Jag ser sambandet mellan _____ och _____.<br>
+  Jag vet att svaret är rimligt eftersom _____.
+  </p>
+
+  </div>
+
+
+  <button
+  class="primary-btn no-print"
+  onclick="window.print()">
+
+  🖨️ Skriv ut lektionen
+
+  </button>
+
+  `;
+
+
+  const output =
+  document.getElementById("lessonOutput");
+
+  output.innerHTML = html;
+
+  output.classList.add("show");
+
+}
+
+
+/* ============================
+   START
+============================ */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  console.log("Matematik som sitter kvar 4–9 är laddad.");
+
+});
+
+</script>
+
+</body>
+</html>
