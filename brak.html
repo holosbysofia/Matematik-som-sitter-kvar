@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bråk – Matematik som sitter kvar</title>
+
+<style>
+
+:root{
+  --bg:#f4f1e9;
+  --paper:#ffffff;
+  --green:#587464;
+  --green-dark:#385449;
+  --green-light:#dfe9e2;
+  --beige:#ebe1cf;
+  --beige-light:#f8f4ec;
+  --blue:#dde8ee;
+  --purple:#e7e1ef;
+  --yellow:#f2e9c8;
+  --rose:#efe0dd;
+  --text:#25312c;
+  --muted:#66716c;
+  --border:#d7ddd8;
+  --shadow:0 5px 18px rgba(30,50,40,.08);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
+
+header{
+  background:linear-gradient(135deg,#3e5d50,#617d6e);
+  color:white;
+  padding:28px 22px;
+}
+
+.header-inner{
+  max-width:1150px;
+  margin:auto;
+}
+
+header h1{
+  margin:0;
+  font-size:34px;
+}
+
+header p{
+  margin:8px 0 0;
+  max-width:850px;
+  font-size:17px;
+}
+
+nav{
+  background:white;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:30;
+}
+
+.nav-inner{
+  max-width:1150px;
+  margin:auto;
+  padding:10px 16px;
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+}
+
+.nav-link{
+  text-decoration:none;
+  color:var(--green-dark);
+  background:var(--green-light);
+  padding:9px 12px;
+  border-radius:9px;
+  white-space:nowrap;
+  font-weight:bold;
+  font-size:14px;
+}
+
+main{
+  max-width:1150px;
+  margin:auto;
+  padding:24px 18px 70px;
+}
+
+.hero{
+  background:linear-gradient(135deg,var(--beige-light),#e3ece6);
+  padding:24px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  margin-bottom:22px;
+}
+
+.hero h2{
+  margin-top:0;
+  color:var(--green-dark);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+.card h3{
+  margin-top:0;
+  color:var(--green-dark);
+}
+
+.section-title{
+  margin:34px 0 14px;
+  color:var(--green-dark);
+  font-size:26px;
+}
+
+.box{
+  padding:15px;
+  border-radius:12px;
+  margin:12px 0;
+}
+
+.understand{
+  background:var(--green-light);
+}
+
+.talk{
+  background:var(--blue);
+}
+
+.connection{
+  background:var(--yellow);
+}
+
+.think{
+  background:var(--purple);
+}
+
+.support{
+  background:var(--rose);
+}
+
+.tag{
+  display:inline-block;
+  background:var(--green-light);
+  padding:5px 10px;
+  border-radius:20px;
+  margin:3px;
+  font-size:13px;
+}
+
+.accordion{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+
+.accordion button{
+  width:100%;
+  background:white;
+  border:none;
+  padding:16px 18px;
+  font-size:17px;
+  font-weight:bold;
+  text-align:left;
+  color:var(--green-dark);
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.accordion button:hover{
+  background:var(--beige-light);
+}
+
+.accordion-content{
+  display:none;
+  padding:0 18px 18px;
+}
+
+.accordion.open .accordion-content{
+  display:block;
+}
+
+.accordion.open .arrow{
+  transform:rotate(180deg);
+}
+
+.arrow{
+  transition:.2s;
+}
+
+.activity{
+  background:white;
+  border-radius:14px;
+  padding:18px;
+  border:1px solid var(--border);
+  margin-bottom:15px;
+  box-shadow:var(--shadow);
+}
+
+.step{
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.step:last-child{
+  border-bottom:none;
+}
+
+.big-fraction{
+  font-size:34px;
+  font-weight:bold;
+  text-align:center;
+  margin:14px 0;
+}
+
+.fraction-line{
+  display:inline-block;
+  text-align:center;
+  vertical-align:middle;
+  margin:0 4px;
+}
+
+.fraction-line span{
+  display:block;
+  padding:0 5px;
+}
+
+.fraction-line .top{
+  border-bottom:2px solid currentColor;
+}
+
+.compare-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+
+.compare-box{
+  background:var(--beige-light);
+  padding:14px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.question-card{
+  background:white;
+  border-left:6px solid var(--green);
+  border-radius:10px;
+  padding:15px;
+  margin:10px 0;
+}
+
+button.print-btn{
+  border:none;
+  background:var(--green);
+  color:white;
+  padding:11px 15px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button.print-btn:hover{
+  background:var(--green-dark);
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  margin-top:45px;
+}
+
+@media print{
+
+  header,
+  nav,
+  .no-print{
+    display:none!important;
+  }
+
+  body{
+    background:white;
+  }
+
+  main{
+    padding:0;
+  }
+
+  .card,
+  .activity,
+  .accordion{
+    box-shadow:none;
+    break-inside:avoid;
+  }
+
+  .accordion-content{
+    display:block!important;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+<h1>🍕 Bråk</h1>
+<p>
+En del av <strong>Matematik som sitter kvar</strong> – med fokus på förståelse,
+matematiska samtal, samband och kunskap som håller över tid.
+</p>
+</div>
+</header>
+
+<nav class="no-print">
+<div class="nav-inner">
+<a class="nav-link" href="index.html">← Till startsidan</a>
+<a class="nav-link" href="#forsta">Förstå</a>
+<a class="nav-link" href="#representationer">Representationer</a>
+<a class="nav-link" href="#prata">Prata matematik</a>
+<a class="nav-link" href="#tankespar">Tankespår</a>
+<a class="nav-link" href="#praktiskt">Praktiskt</a>
+<a class="nav-link" href="#samband">Samband</a>
+<a class="nav-link" href="#minne">Matematikminne</a>
+<a class="nav-link" href="#utmaning">Utmaning</a>
+<a class="nav-link" href="#stod">NPF & språk</a>
+<a class="nav-link" href="#larare">Lärarstöd</a>
+</div>
+</nav>
+
+<main>
+
+<section class="hero">
+
+<h2>Bråk är ett tal – inte bara en del av en pizza</h2>
+
+<p>
+Elever behöver förstå att bråk kan beskriva del av helhet, kvot,
+förhållande och ett bestämt tal på tallinjen.
+</p>
+
+<div class="box understand">
+
+<strong>Den centrala idén:</strong>
+
+<p>
+Bråket
+<span class="fraction-line">
+<span class="top">3</span>
+<span>4</span>
+</span>
+beskriver ett tal där helheten är delad i fyra lika stora delar
+och tre av delarna används.
+</p>
+
+</div>
+
+</section>
+
+
+<h2 id="forsta" class="section-title">1. Förstå begreppet</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Vad ska eleven förstå?</h3>
+<ul>
+<li>Att ett bråk är ett tal.</li>
+<li>Att nämnaren visar hur helheten delas.</li>
+<li>Att täljaren visar hur många delar som avses.</li>
+<li>Att olika bråk kan ha samma värde.</li>
+<li>Att större nämnare inte automatiskt betyder större bråk.</li>
+<li>Att bråk kan jämföras på flera sätt.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Viktiga begrepp</h3>
+<span class="tag">täljare</span>
+<span class="tag">nämnare</span>
+<span class="tag">helhet</span>
+<span class="tag">del</span>
+<span class="tag">värde</span>
+<span class="tag">likvärdiga bråk</span>
+<span class="tag">förlänga</span>
+<span class="tag">förkorta</span>
+<span class="tag">blandad form</span>
+</div>
+
+<div class="card">
+<h3>Lärarens kontrollfrågor</h3>
+<ul>
+<li>Vad betyder nämnaren?</li>
+<li>Vad betyder täljaren?</li>
+<li>Kan två olika bråk ha samma värde?</li>
+<li>Var skulle bråket ligga på tallinjen?</li>
+<li>Är bråket större eller mindre än 1?</li>
+</ul>
+</div>
+
+</div>
+
+
+<h2 id="representationer" class="section-title">2. Representationer</h2>
+
+<div class="activity">
+
+<h3>Samma värde – flera uttryck</h3>
+
+<div class="big-fraction">
+
+<span class="fraction-line">
+<span class="top">1</span>
+<span>2</span>
+</span>
+
+=
+
+0,5
+
+=
+
+50 %
+
+</div>
+
+<p>
+Låt eleverna återkommande växla mellan representationerna.
+Det hjälper dem att se sambandet mellan bråk, decimalform och procent.
+</p>
+
+<div class="compare-grid">
+
+<div class="compare-box">
+Bråk<br>
+1/2
+</div>
+
+<div class="compare-box">
+Decimal<br>
+0,5
+</div>
+
+<div class="compare-box">
+Procent<br>
+50 %
+</div>
+
+<div class="compare-box">
+Tallinje<br>
+mitt mellan 0 och 1
+</div>
+
+</div>
+
+</div>
+
+
+<div class="accordion">
+<button>
+<span>🧱 Representation: del av helhet</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+<p>
+Rita en rektangel och dela den i fyra lika stora delar.
+Färglägg tre.
+</p>
+
+<p>
+Fråga:
+<strong>Vad betyder trean? Vad betyder fyran?</strong>
+</p>
+</div>
+</div>
+
+
+<div class="accordion">
+<button>
+<span>📏 Representation: tallinje</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+
+<p>
+Rita en tallinje från 0 till 1.
+Placera:
+</p>
+
+<p>
+1/4 &nbsp;&nbsp; 1/2 &nbsp;&nbsp; 3/4
+</p>
+
+<p>
+Fråga:
+<strong>Hur ser du vilket bråk som är störst?</strong>
+</p>
+
+</div>
+</div>
+
+
+<div class="accordion">
+<button>
+<span>🔢 Representation: symbol</span>
+<span class="arrow">▼</span>
+</button>
+
+<div class="accordion-content">
+
+<p>
+Låt eleven koppla symbolen till en bild eller tallinje.
+</p>
+
+<p>
+Exempel:
+</p>
+
+<div class="big-fraction">
+<span class="fraction-line">
+<span class="top">5</span>
+<span>8</span>
+</span>
+</div>
+
+<p>
+Fråga:
+<strong>Vad vet du om talet utan att räkna?</strong>
+</p>
+
+</div>
+</div>
+
+
+<h2 id="prata" class="section-title">3. Prata matematik</h2>
+
+<div class="activity">
+
+<h3>Uppgift 1 – Vilket är störst?</h3>
+
+<div class="big-fraction">
+
+<span class="fraction-line">
+<span class="top">3</span>
+<span>4</span>
+</span>
+
+eller
+
+<span class="fraction-line">
+<span class="top">5</span>
+<span>8</span>
+</span>
+
+</div>
+
+<div class="question-card">
+<strong>Observera:</strong><br>
+Vad lägger du märke till?
+</div>
+
+<div class="question-card">
+<strong>Förklara:</strong><br>
+Hur tänkte du?
+</div>
+
+<div class="question-card">
+<strong>Visa:</strong><br>
+Kan du visa det med bild eller tallinje?
+</div>
+
+<div class="question-card">
+<strong>Jämför:</strong><br>
+Finns det mer än ett sätt att avgöra?
+</div>
+
+<div class="question-card">
+<strong>Samband:</strong><br>
+Kan du koppla båda bråken till procent?
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Uppgift 2 – Samma eller olika?</h3>
+
+<p>
+Undersök dessa bråk:
+</p>
+
+<div class="big-fraction">
+
+<span class="fraction-line">
+<span class="top">1</span>
+<span>2</span>
+</span>
+
+&nbsp;
+
+<span class="fraction-line">
+<span class="top">2</span>
+<span>4</span>
+</span>
+
+&nbsp;
+
+<span class="fraction-line">
+<span class="top">4</span>
+<span>8</span>
+</span>
+
+</div>
+
+<p>
+Samtala om:
+</p>
+
+<ul>
+<li>Vad är lika?</li>
+<li>Vad är olika?</li>
+<li>Varför har de samma värde?</li>
+<li>Hur kan du bevisa det?</li>
+</ul>
+
+</div>
+
+
+<h2 id="tankespar" class="section-title">4. Vanliga tankespår</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Tankespår 1</h3>
+
+<p>
+<strong>
+1/8 är större än 1/6 eftersom 8 är större än 6.
+</strong>
+</p>
+
+<div class="box think">
+Fråga:
+<p>
+Om två lika stora pizzor delas i 6 respektive 8 delar,
+vilka bitar blir störst?
+</p>
+</div>
+
+</div>
+
+<div class="card">
+<h3>Tankespår 2</h3>
+
+<p>
+<strong>
+Eleven jämför bara täljarna.
+</strong>
+</p>
+
+<div class="box think">
+Fråga:
+<p>
+Kan 3/10 och 3/5 vara lika stora bara för att täljaren är samma?
+</p>
+</div>
+
+</div>
+
+<div class="card">
+<h3>Tankespår 3</h3>
+
+<p>
+<strong>
+Förlängning förändrar bråkets värde.
+</strong>
+</p>
+
+<div class="box think">
+Fråga:
+<p>
+Vad händer om varje fjärdedel delas i två mindre delar?
+Har mängden förändrats?
+</p>
+</div>
+
+</div>
+
+<div class="card">
+<h3>Tankespår 4</h3>
+
+<p>
+<strong>
+Bråk ses bara som delar av figurer.
+</strong>
+</p>
+
+<div class="box think">
+Fråga:
+<p>
+Var ligger 7/4 på tallinjen?
+</p>
+</div>
+
+</div>
+
+</div>
+
+
+<h2 id="praktiskt" class="section-title">5. Praktiskt arbete</h2>
+
+<div class="activity">
+
+<h3>Aktivitet – Bygg bråken</h3>
+
+<p>
+Material:
+papper, bråkcirklar, bråkstavar eller vikta pappersremsor.
+</p>
+
+<div class="step">
+<strong>1. Bygg 1 hel.</strong>
+</div>
+
+<div class="step">
+<strong>2. Visa 1/2.</strong>
+</div>
+
+<div class="step">
+<strong>3. Visa 2/4 bredvid.</strong>
+</div>
+
+<div class="step">
+<strong>4. Undersök 4/8.</strong>
+</div>
+
+<div class="step">
+<strong>5. Formulera en regel.</strong>
+<p>
+Vad händer med täljare och nämnare när värdet är oförändrat?
+</p>
+</div>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Aktivitet – Bråk på golvet</h3>
+
+<p>
+Tejpa en tallinje på golvet från 0 till 2.
+</p>
+
+<p>
+Ge elever kort med exempelvis:
+</p>
+
+<p>
+1/4, 1/2, 3/4, 5/4, 3/2, 7/4
+</p>
+
+<p>
+Eleverna placerar sig på tallinjen och förklarar sin position.
+</p>
+
+</div>
+
+
+<h2 id="samband" class="section-title">6. Samband</h2>
+
+<div class="activity">
+
+<h3>Bråk hör ihop med mycket mer</h3>
+
+<p>
+
+<strong>
+Division → Bråk → Decimalform → Procent → Förhållande → Proportionalitet → Algebra
+</strong>
+
+</p>
+
+<div class="box connection">
+
+<p>
+3 ÷ 4
+=
+3/4
+=
+0,75
+=
+75 %
+</p>
+
+</div>
+
+<p>
+Fråga:
+<strong>Vad förändras och vad är egentligen samma?</strong>
+</p>
+
+</div>
+
+
+<h2 id="minne" class="section-title">7. Matematikminne</h2>
+
+<div class="activity">
+
+<h3>Fem korta återkallningsfrågor</h3>
+
+<div class="question-card">
+<strong>1.</strong><br>
+Vilket är störst: 4/5 eller 3/4?
+</div>
+
+<div class="question-card">
+<strong>2.</strong><br>
+Skriv 1/2 på två andra sätt.
+</div>
+
+<div class="question-card">
+<strong>3.</strong><br>
+Vilket bråk är lika mycket som 2/3?
+</div>
+
+<div class="question-card">
+<strong>4.</strong><br>
+Var ligger 7/4 på tallinjen?
+</div>
+
+<div class="question-card">
+<strong>5.</strong><br>
+Förklara varför 3/6 och 1/2 har samma värde.
+</div>
+
+</div>
+
+
+<h2 id="utmaning" class="section-title">8. Utmaning</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Utmaning 1</h3>
+
+<p>
+Hitta tre olika bråk mellan 1/2 och 3/4.
+</p>
+
+<p>
+Förklara hur du vet att de ligger mellan.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Utmaning 2</h3>
+
+<p>
+Vilket bråk ska stå i rutan?
+</p>
+
+<div class="big-fraction">
+
+<span class="fraction-line">
+<span class="top">3</span>
+<span>4</span>
+</span>
+
+=
+
+<span class="fraction-line">
+<span class="top">?</span>
+<span>20</span>
+</span>
+
+</div>
+
+<p>
+Förklara utan att bara skriva en regel.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Utmaning 3</h3>
+
+<p>
+Skapa två olika bråk som tillsammans blir 1.
+</p>
+
+<p>
+Kan du hitta fem olika lösningar?
+</p>
+
+</div>
+
+</div>
+
+
+<h2 id="stod" class="section-title">9. NPF- och språkstöd</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>🗣️ Språkstarter</h3>
+
+<p>
+Jag tror att _____ är störst eftersom _____.
+</p>
+
+<p>
+Jag ser att bråken är lika eftersom _____.
+</p>
+
+<p>
+Nämnaren visar _____.
+</p>
+
+<p>
+Täljaren visar _____.
+</p>
+
+</div>
+
+<div class="card">
+<h3>👁️ Visuellt stöd</h3>
+
+<ul>
+<li>Visa ett bråk i taget.</li>
+<li>Använd bild och tallinje samtidigt.</li>
+<li>Markera täljare och nämnare tydligt.</li>
+<li>Undvik för många uppgifter på samma sida.</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h3>🧠 Kognitiv avlastning</h3>
+
+<ul>
+<li>Låt eleven först jämföra med 1/2.</li>
+<li>Använd konkreta bråkdelar.</li>
+<li>Ge korta instruktioner.</li>
+<li>Låt eleven prata innan hen skriver.</li>
+</ul>
+
+</div>
+
+</div>
+
+
+<h2 id="larare" class="section-title">10. Lärarstöd</h2>
+
+<div class="activity">
+
+<h3>Vad ska läraren lyssna efter?</h3>
+
+<ul>
+<li>Förstår eleven att ett bråk är ett tal?</li>
+<li>Kan eleven resonera om storlek?</li>
+<li>Kan eleven använda tallinje?</li>
+<li>Kan eleven se likvärdiga bråk?</li>
+<li>Kan eleven koppla bråk till division?</li>
+<li>Kan eleven koppla bråk till decimalform och procent?</li>
+<li>Kan eleven förklara varför en metod fungerar?</li>
+</ul>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Frågor som för undervisningen vidare</h3>
+
+<ul>
+<li>Hur vet du?</li>
+<li>Kan du visa på ett annat sätt?</li>
+<li>Vad händer om nämnaren blir större?</li>
+<li>Är det alltid så?</li>
+<li>Vilket bråk ligger närmast 1?</li>
+<li>Vilket bråk ligger närmast 1/2?</li>
+<li>Vad påminner detta om från tidigare matematik?</li>
+</ul>
+
+</div>
+
+
+<div class="activity">
+
+<h3>Exit ticket</h3>
+
+<p>
+Svara på två frågor:
+</p>
+
+<ol>
+<li>
+Skriv ett bråk som är lika mycket som 3/4.
+</li>
+
+<li>
+Förklara varför bråken har samma värde.
+</li>
+</ol>
+
+<button class="print-btn no-print" onclick="window.print()">
+🖨️ Skriv ut sidan
+</button>
+
+</div>
+
+
+<footer>
+Matematik som sitter kvar • Bråk • Matematikdidaktisk bank 4–9
+</footer>
+
+</main>
+
+
+<script>
+
+document.querySelectorAll(".accordion button").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    const box = button.parentElement;
+
+    box.classList.toggle("open");
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
